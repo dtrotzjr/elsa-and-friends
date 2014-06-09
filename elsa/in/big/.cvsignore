@@ -1,0 +1,8 @@
+*.i
+# this is for temp directories that were used to do minimization with delta
+delta*
+# places to hide junk
+hide*
+# my collection of versions of the .i files that have been edited to
+# actually build in my verison of g++
+works

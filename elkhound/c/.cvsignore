@@ -1,0 +1,16 @@
+Makefile
+bcparse
+*.output
+*.tab.*
+bcparse.y
+*.gen.*
+*.d
+c.tok
+config.status
+config.summary
+lexer1yy.cc
+*.o
+cparse
+lexer2
+.gdbinit
+testcout
