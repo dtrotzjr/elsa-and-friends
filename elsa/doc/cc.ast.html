@@ -51,7 +51,7 @@ of the function names (without qualifiers) in the AST:
   class FuncPrinter : public ASTVisitor {
   public:
     virtual bool visitFunction(Function *f) {
-      cout &lt;&lt; f-&gt;nameAndParams-&gt;getDeclaratorId()-&gt;getName() &lt;&lt; "\n";
+      std::cout &lt;&lt; f-&gt;nameAndParams-&gt;getDeclaratorId()-&gt;getName() &lt;&lt; "\n";
     }
   };
 

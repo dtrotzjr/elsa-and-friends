@@ -13,7 +13,7 @@ struct _ios_fields
 class ios : public _ios_fields {
 };
 
-class ostream : virtual public ios
+class std::ostream : virtual public ios
 {
 };
 
@@ -24,6 +24,6 @@ class strstreambuf {
 class strstreambase : virtual public ios {
 };
 
-class ostrstream : public strstreambase, public ostream {
+class ostrstream : public strstreambase, public std::ostream {
     __ssize_t   pcount() { return ((strstreambuf*)_strbuf)->pcount(); }
 };

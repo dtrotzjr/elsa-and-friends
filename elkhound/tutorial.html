@@ -676,7 +676,7 @@ Then, run the parser like this:
 
   // print the tree
   PTreeNode *ptn = (PTreeNode*)result;
-  ptn-&gt;printTree(cout, PTreeNode::PF_EXPAND);
+  ptn-&gt;printTree(std::cout, PTreeNode::PF_EXPAND);
 </pre>
 
 <p>The file <a href="examples/gcom2/parser.cc"><tt>parser.cc</tt></a>
@@ -1293,7 +1293,7 @@ method automatically.
   Stmt *top = (Stmt*)result;
 
   if (printAST) {
-    top-&gt;debugPrint(cout, 0);
+    top-&gt;debugPrint(std::cout, 0);
   }
 
   // evaluate

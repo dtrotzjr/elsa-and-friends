@@ -1,6 +1,6 @@
 // t0230.cc
 // function template overloadings that differ only in constness under pointer
-// needed for ostream.h, __copy_aux2
+// needed for std::ostream, __copy_aux2
 
 // overloading 0: most general
 template <class S>

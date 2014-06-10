@@ -9,7 +9,7 @@
 #include "trace.h"       // tracing system
 #include "nonport.h"     // getMilliseconds
 
-#include <fstream.h>     // ofstream
+#include <fstream>     // std::ofstream
 
 
 #if 0    // not used anymore; gprof is much better
@@ -63,7 +63,7 @@ GrammarAnalysis::~GrammarAnalysis()
 }
 
 
-void GrammarAnalysis::printProductions(ostream &os) const
+void GrammarAnalysis::printProductions(std::ostream &os) const
 {
   if (cyclic) {
     os << "(cyclic!) ";
@@ -72,11 +72,11 @@ void GrammarAnalysis::printProductions(ostream &os) const
 }
 
 
-void printSymbols(ostream &os, ObjList<Symbol> const &list)
+void printSymbols(std::ostream &os, ObjList<Symbol> const &list)
 {
   for (ObjListIter<Symbol> iter(list);
        !iter.isDone(); iter.adv()) {
-    os << "  " << *(iter.data()) << endl;
+    os << "  " << *(iter.data()) << std::endl;
   }
 }
 
@@ -573,7 +573,7 @@ void GrammarAnalysis::computeFollow()
                   << "Follow(" << rightNT.name
                   << "): adding " << term.data()->name
                   << " by first(RHS-tail) of " << *prod
-                  << endl;
+                  << std::endl;
               }
             }
           }
@@ -594,7 +594,7 @@ void GrammarAnalysis::computeFollow()
                     << "Follow(" << rightNT.name
                     << "): adding " << indexedTerms[t]->name
                     << " by follow(LHS) of " << *prod
-                    << endl;
+                    << std::endl;
                 }
               }
             }
@@ -644,7 +644,7 @@ void GrammarAnalysis::computePredictiveParsingTable()
 
 
   // print the resulting table
-  ostream &os = trace("pred-table") << endl;
+  std::ostream &os = trace("pred-table") << std::endl;
 
   // for each nonterminal
   INTLOOP(nonterm, 0, numNonterms) {
@@ -660,7 +660,7 @@ void GrammarAnalysis::computePredictiveParsingTable()
         prod.data()->print(os);
       }
 
-      os << endl;
+      os << std::endl;
     }
   }
 
@@ -894,12 +894,12 @@ void GrammarAnalysis::constructLRItemSets()
   if (tracingSys("item-sets")) {
     // print each item set
     FOREACH_OBJLIST(ItemSet, itemSetsDone, itemSet) {
-      ostream &os = trace("item-sets")
+      std::ostream &os = trace("item-sets")
         << "State " << itemSet.data()->id
         << ", sample input: " << sampleInput(itemSet.data())
-        << endl
+        << std::endl
         << "  and left context: " << leftContextString(itemSet.data())
-        << endl
+        << std::endl
         ;
 
       itemSet.data()->print(os);
@@ -908,9 +908,9 @@ void GrammarAnalysis::constructLRItemSets()
 
 
   // write this info to a graph applet file
-  ofstream out("lrsets.g");
+  std::ofstream out("lrsets.g");
   if (!out) {
-    xsyserror("ofstream open");
+    xsyserror("std::ofstream open");
   }
   out << "# lr sets in graph form\n";
 
@@ -981,22 +981,22 @@ bool GrammarAnalysis::checkSLRConflicts(ItemSet const *state, Terminal const *sy
       trace("conflict")
         << "--------- state " << state->id << " ----------\n"
         << "left context: " << leftContextString(state)
-        << endl
+        << std::endl
         << "sample input: " << sampleInput(state)
-        << endl
+        << std::endl
         ;
     }
 
     trace("conflict")
       << "conflict for symbol " << sym->name
-      << endl;
+      << std::endl;
 
     if (shiftDest) {
-      trace("conflict") << "  shift, and move to state " << shiftDest->id << endl;
+      trace("conflict") << "  shift, and move to state " << shiftDest->id << std::endl;
     }
 
     SFOREACH_PRODUCTION(reductions, prod) {
-      trace("conflict") << "  reduce by rule " << *(prod.data()) << endl;
+      trace("conflict") << "  reduce by rule " << *(prod.data()) << std::endl;
     }
 
     return true;    // found conflict
@@ -1302,7 +1302,7 @@ void GrammarAnalysis::lrParse(char const *input)
       // debugging
       trace("parse")
         << "moving to state " << state->id
-        << " after shifting symbol " << symbol->name << endl;
+        << " after shifting symbol " << symbol->name << std::endl;
     }
 
     else if (shiftDest == NULL &&
@@ -1344,14 +1344,14 @@ void GrammarAnalysis::lrParse(char const *input)
       // debugging
       trace("parse")
         << "moving to state " << state->id
-        << " after reducing by rule " << *prod << endl;
+        << " after reducing by rule " << *prod << std::endl;
     }
 
     else if (shiftDest == NULL &&
              reductions.isEmpty()) {       // no transition: syntax error
       trace("parse")
         << "no actions defined for symbol " << symbol->name
-        << " in state " << state->id << endl;
+        << " in state " << state->id << std::endl;
       break;       // stop parsing
     }
 
@@ -1362,11 +1362,11 @@ void GrammarAnalysis::lrParse(char const *input)
         << "; possible actions:\n";
 
       if (shiftDest) {
-        trace("parse") << "  shift, and move to state " << shiftDest->id << endl;
+        trace("parse") << "  shift, and move to state " << shiftDest->id << std::endl;
       }
 
       SFOREACH_PRODUCTION(reductions, prod) {
-        trace("parse") << "  reduce by rule " << *(prod.data()) << endl;
+        trace("parse") << "  reduce by rule " << *(prod.data()) << std::endl;
       }
 
       break;       // stop parsing
@@ -1379,18 +1379,18 @@ void GrammarAnalysis::lrParse(char const *input)
   stateStack.reverse();    // more convenient for printing
   symbolStack.reverse();
 
-  ostream &os = trace("parse") << "  state stack:";
+  std::ostream &os = trace("parse") << "  state stack:";
   SFOREACH_OBJLIST(ItemSet, stateStack, stateIter) {
     os << " " << stateIter.data()->id;
   }
   os << " current=" << state->id;   // print current state too
-  os << endl;
+  os << std::endl;
 
   trace("parse") << "  symbol stack:";
   SFOREACH_SYMBOL(symbolStack, sym) {
     os << " " << sym.data()->name;
   }
-  os << endl;
+  os << std::endl;
 }
 
 
@@ -1541,7 +1541,7 @@ void GrammarAnalysis::exampleGrammar()
 
 
   // verify we got what we expected
-  printProductions(trace("grammar") << endl);
+  printProductions(trace("grammar") << std::endl);
 
 
   // run analyses
@@ -1575,12 +1575,12 @@ void GrammarAnalysis::runAnalyses()
 
   // print results
   {
-    ostream &tracer = trace("terminals") << "Terminals:\n";
+    std::ostream &tracer = trace("terminals") << "Terminals:\n";
     printSymbols(tracer, toObjList(terminals));
   }
   {
-    ostream &tracer = trace("nonterminals") << "Nonterminals:\n";
-    tracer << "  " << emptyString << endl;
+    std::ostream &tracer = trace("nonterminals") << "Nonterminals:\n";
+    tracer << "  " << emptyString << std::endl;
     printSymbols(tracer, toObjList(nonterminals));
   }
 
@@ -1601,14 +1601,14 @@ void GrammarAnalysis::runAnalyses()
     itemSetClosure(itemSet);
 
     // print it
-    cout << "Closure of: ";
-    kernel->print(cout);
-    cout << endl;
+    std::cout << "Closure of: ";
+    kernel->print(std::cout);
+    std::cout << std::endl;
 
     SFOREACH_DOTTEDPRODUCTION(itemSet, dprod) {
-      cout << "  ";
-      dprod.data()->print(cout);
-      cout << endl;
+      std::cout << "  ";
+      dprod.data()->print(std::cout);
+      std::cout << std::endl;
     }
   }
   #endif // 0

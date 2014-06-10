@@ -230,7 +230,7 @@ public:     // funcs
   // invoke 'vis.visitAtomicType(this)', and then traverse subtrees
   virtual void traverse(TypeVisitor &vis) = 0;
 
-  // toString()+newline to cout
+  // toString()+newline to std::cout
   void gdb() const;
 
   ALLOC_STATS_DECLARE
@@ -660,7 +660,7 @@ public:     // funcs
   virtual string toMLString() const = 0;
   void putSerialNo(stringBuilder &sb) const;
   
-  // toString+newline to cout
+  // toString+newline to std::cout
   void gdb() const;
 
   // the left/right business is to allow us to print function

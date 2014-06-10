@@ -1,5 +1,5 @@
 // t0283.cc
-// delta-minimized from ostream, not yet hand-minimized
+// delta-minimized from std::ostream, not yet hand-minimized
 
 namespace std
 {

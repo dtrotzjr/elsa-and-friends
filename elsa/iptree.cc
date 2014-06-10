@@ -41,7 +41,7 @@ char const *toString(VariantResult r)
 void printBits(ArrayStack<char> const &bits)
 {
   for (int i=0; i < bits.length(); i++) {
-    cout << (bits[i]? '1' : '0');
+    std::cout << (bits[i]? '1' : '0');
   }
 }
 
@@ -50,11 +50,11 @@ void iprintResults(VariantCursor p, ArrayStack<char> &bits)
 {
   if (p->data) {
     // print the result
-    cout << toString(p->data) << "  ";
+    std::cout << toString(p->data) << "  ";
 
     // and the bitstring
     printBits(bits);
-    cout << "\n";
+    std::cout << "\n";
   }
 
   if (p->zero) {
@@ -362,24 +362,24 @@ int Node::writeSubs(FILE *fp, GrowArray<char> const &source,
 }
 
 
-static void indent(ostream &os, int ind)
+static void indent(std::ostream &os, int ind)
 {
   for (int i=0; i<ind; i++) {
     os << ' ';
   }
 }
 
-void Node::debugPrint(ostream &os, int ind) const
+void Node::debugPrint(std::ostream &os, int ind) const
 {
   indent(os, ind);
-  cout << rangeString() << " \t" << toString(rel) << "\n";
+  std::cout << rangeString() << " \t" << toString(rel) << "\n";
 
   if (subintervals) {
     subintervals->debugPrintSubs(os, ind+2);
   }
 }
 
-void Node::debugPrintSubs(ostream &os, int ind) const
+void Node::debugPrintSubs(std::ostream &os, int ind) const
 {
   // left siblings
   if (left) {
@@ -467,10 +467,10 @@ int IPTree::getLargestFiniteEndpoint()
 void IPTree::gdb() const
 {
   if (!top) {
-    cout << "(empty tree)\n";
+    std::cout << "(empty tree)\n";
   }
   else {
-    top->debugPrint(cout, 0);
+    top->debugPrint(std::cout, 0);
   }
 }
 

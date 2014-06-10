@@ -1,6 +1,6 @@
 // t0108.cc
 // simple template argument tests
-// needed for ostream.h, __default_alloc_template::reallocate
+// needed for std::ostream, __default_alloc_template::reallocate
 
 template <int n>
 class Foo {

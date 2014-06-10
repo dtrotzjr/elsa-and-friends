@@ -126,7 +126,7 @@
 #include "lexer2.h"      // Lexer2
 
 #include <stdio.h>       // FILE
-#include <fstream.h>     // ofstream
+#include <fstream>     // std::ofstream
 
 
 // ----------------------- StackNode -----------------------
@@ -251,7 +251,7 @@ void GLR::glrParse(char const *inputFname)
       << "processing token " << currentToken->toString()
       << ", " << activeParsers.count() << " active parsers"
       << " ----------"
-      << endl;
+      << std::endl;
 
     // convert the token to a symbol
     xassert(currentToken->type < numTerms);
@@ -291,17 +291,17 @@ void GLR::glrParse(char const *inputFname)
 
     // if all active parsers have died, there was an error
     if (activeParsers.isEmpty()) {
-      cout << "Line " << currentToken->loc.line
+      std::cout << "Line " << currentToken->loc.line
            << ", col " << currentToken->loc.col
-           << ": Parse error at " << currentToken->toString() << endl;
+           << ": Parse error at " << currentToken->toString() << std::endl;
            
       if (lastToDie == NULL) {                     
         // I'm not entirely confident it has to be nonnull..
-        cout << "what the?  lastToDie is NULL??\n";         
+        std::cout << "what the?  lastToDie is NULL??\n";         
       }
       else {
         // print out the context of that parser
-        cout << "last parser to die had:\n"
+        std::cout << "last parser to die had:\n"
                 "  sample input: " << sampleInput(lastToDie->state) << "\n"
                 "  left context: " << leftContextString(lastToDie->state) << "\n";
       }
@@ -340,13 +340,13 @@ void GLR::glrParse(char const *inputFname)
   // I've decided to leave it this way
   xassert(tn);
   if (tracingSys("parse-tree")) {
-    tn->printParseTree(trace("parse-tree") << endl, 2 /*indent*/);
+    tn->printParseTree(trace("parse-tree") << std::endl, 2 /*indent*/);
   }
 
 
   // generate an ambiguity report
   if (tracingSys("ambiguities")) {
-    tn->ambiguityReport(trace("ambiguities") << endl);
+    tn->ambiguityReport(trace("ambiguities") << std::endl);
   }
 }
 
@@ -453,7 +453,7 @@ int GLR::doAllPossibleReductions(StackNode *parser,
           << "in state " << parser->state->id
           << ", reducing by " << *(prod.data())
           << ", back to state " << rpath->finalState->state->id
-          << endl;
+          << std::endl;
       }
 
       // this is like shifting the reduction's LHS onto 'finalParser'
@@ -570,7 +570,7 @@ void GLR::glrShiftNonterminal(StackNode *leftSibling,
       << "from state " << leftSibling->state->id
       << ", shifting production " << *(prod)
       << ", transitioning to state " << rightSiblingState->id
-      << endl;
+      << std::endl;
   }
 
   // is there already an active parser with this state?
@@ -657,12 +657,12 @@ void GLR::mergeAlternativeParses(NonterminalNode &node, AttrContext &actx)
   // the parser that the parent attributes MUST match exactly
   if (actx.parentAttr() != node.attr) {
     // there is a bug in the parser
-    cout << "PARSER GRAMMAR BUG: alternative parses have different attributes\n";
-    cout << "  existing parse(s) and attributes:\n";
-    node.printParseTree(cout, 4 /*indent*/);
+    std::cout << "PARSER GRAMMAR BUG: alternative parses have different attributes\n";
+    std::cout << "  existing parse(s) and attributes:\n";
+    node.printParseTree(std::cout, 4 /*indent*/);
 
-    cout << "  new parse and attributes:\n";
-    actx.reduction().printParseTree(actx.parentAttr(), cout, 4 /*indent*/);
+    std::cout << "  new parse and attributes:\n";
+    actx.reduction().printParseTree(actx.parentAttr(), std::cout, 4 /*indent*/);
 
     xfailure("parser bug: alternative parses with different attributes");
   }
@@ -688,7 +688,7 @@ void GLR::glrShiftTerminals(ObjList<PendingShift> &pendingShifts)
       << "from state " << leftSibling->state->id
       << ", shifting terminal " << currentToken->toString()
       << ", transitioning to state " << newState->id
-      << endl;
+      << std::endl;
 
     // if there's already a parser with this state
     StackNode *rightSibling = findActiveParser(newState);
@@ -948,11 +948,11 @@ void GLR::glrTest(char const *grammarFname, char const *inputFname,
       "( x ) ( x ) $",
     };
 
-    printProductions(cout);
+    printProductions(std::cout);
     runAnalyses();
 
     INTLOOP(i, 0, (int)TABLESIZE(input)) {
-      cout << "------ parsing: `" << input[i] << "' -------\n";
+      std::cout << "------ parsing: `" << input[i] << "' -------\n";
       glrParse(input[i]);
     }
   #endif // 0/1
@@ -963,7 +963,7 @@ void GLR::glrTest(char const *grammarFname, char const *inputFname,
 
     // spit grammar out as something bison might be able to parse
     {
-      ofstream bisonOut("bisongr.y");
+      std::ofstream bisonOut("bisongr.y");
       printAsBison(bisonOut);
     }
 
@@ -971,11 +971,11 @@ void GLR::glrTest(char const *grammarFname, char const *inputFname,
     if (symOfInterestName != NULL) {
       symOfInterest = findSymbolC(symOfInterestName);
       if (!symOfInterest) {
-        cout << "warning: " << symOfInterestName << " isn't in the grammar\n";
+        std::cout << "warning: " << symOfInterestName << " isn't in the grammar\n";
       }
     }
 
-    printProductions(trace("grammar") << endl);
+    printProductions(trace("grammar") << std::endl);
     runAnalyses();
 
 
@@ -987,7 +987,7 @@ void GLR::glrTest(char const *grammarFname, char const *inputFname,
 
 
 #ifdef GLR_MAIN
-//#include <fstream.h>    // ofstream
+//#include <fstream>    // std::ofstream
 
 int main(int argc, char **argv)
 {
@@ -1017,7 +1017,7 @@ int main(int argc, char **argv)
   }
 
   if (argc != 2) {
-    cout << "usage: " << progName << " [options] grammar-file input-file\n"
+    std::cout << "usage: " << progName << " [options] grammar-file input-file\n"
             "  options:\n"
             "    -tr <sys>:  turn on tracing for the named subsystem\n"
             "    -sym <sym>: name the \"symbol of interest\"\n"

@@ -4,7 +4,7 @@
 
 verbatim ParseEnv [
 
-#include <iostream.h>      // cout
+#include <iostream>      // std::cout
 #include "trace.h"         // trace
 #include "locstr.h"        // LocString
 #include "strhash.h"       // StringHash
@@ -12,7 +12,7 @@ verbatim ParseEnv [
 #include "parssppt.h"      // ParseTreeAndTokens
 
 #define D(msg) \
-  trace("cdecl") << msg << endl
+  trace("cdecl") << msg << std::endl
 #define R0 return 0
 
 
@@ -69,7 +69,7 @@ void ParseEnv::addType(StringRef type)
 {
   StringHash *h = types.first();
   if (h->get(type)) {
-    cout << "duplicate entry for " << type << " -- will ignore\n";
+    std::cout << "duplicate entry for " << type << " -- will ignore\n";
   }
   else {
     h->add(type, (void*)type);

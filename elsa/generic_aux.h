@@ -26,7 +26,7 @@ void setAmbiguity(PQName *n, PQName *newAmbig);
 
 template <class NODE>
 void genericPrintAmbiguities(NODE const *ths, char const *typeName,
-                             ostream &os, int indent)
+                             std::ostream &os, int indent)
 {
   // count the number of alternatives
   int numAlts = 0;
@@ -99,7 +99,7 @@ void genericAddAmbiguity(NODE *main, NODE *alt)
   if (main->next) {
     // I don't expect 'main' to already be on a list, so I'll
     // make some noise; but I think it will work anyway
-    cout << "note: ambiguous " << main->kindName()
+    std::cout << "note: ambiguous " << main->kindName()
          << "node leader is already on a list..\n";
   }
 

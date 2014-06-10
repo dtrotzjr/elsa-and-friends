@@ -68,14 +68,14 @@ VariantResult Minimizer::runTest()
   }
   
   if (code == 0) {
-    cout << "p";
-    flush(cout);
+    std::cout << "p";
+    flush(std::cout);
     passingTests++;
     return VR_PASSED;
   }
   else {
-    cout << ".";
-    flush(cout);
+    std::cout << ".";
+    flush(std::cout);
     failingTests++;
     return VR_FAILED;
   }
@@ -103,8 +103,8 @@ bool Minimizer::outerRunTest(int &size, Node *n, Relevance rel)
     }
   }
   else {
-    cout << "c";
-    flush(cout);
+    std::cout << "c";
+    flush(std::cout);
     cachedTests++;
   }
 
@@ -168,8 +168,8 @@ bool Minimizer::minimize(Node *n)
   int size;
   if (outerRunTest(size, n, R_IRRELEVANT_SIBS)) {
     // we have made progress
-    cout << "\nred2: " << stringf("%10d", size) << " ";
-    flush(cout);
+    std::cout << "\nred2: " << stringf("%10d", size) << " ";
+    flush(std::cout);
     return true;
   }
 
@@ -200,8 +200,8 @@ bool Minimizer::minimize(Node *n)
   // any subintervals
   if (outerRunTest(size, n, R_IRRELEVANT)) {
     // we have made progress
-    cout << "\nred1: " << stringf("%10d", size) << " ";
-    flush(cout);
+    std::cout << "\nred1: " << stringf("%10d", size) << " ";
+    flush(std::cout);
     ret = true;
   }
   else {
@@ -252,13 +252,13 @@ void entry(int argc, char *argv[])
 
   if (checktree) {
     if (argc != 3) {
-      cout << "usage: " << progName << " [options] foo.c foo.c.str\n";
+      std::cout << "usage: " << progName << " [options] foo.c foo.c.str\n";
       return;
     }
   }
   else {
     if (argc != 4) {
-      cout << "usage: " << progName << " [options] foo.c foo.c.str ./test-program\n";
+      std::cout << "usage: " << progName << " [options] foo.c foo.c.str ./test-program\n";
       return;
     }
   }
@@ -282,7 +282,7 @@ void entry(int argc, char *argv[])
   readFile(m.sourceFname, m.source);
 
   // build the interval partition tree
-  cout << "building interval partition tree\n";
+  std::cout << "building interval partition tree\n";
   m.tree = parseFile(treeFname);
 
   // check that its size does not exceed the source file
@@ -295,15 +295,15 @@ void entry(int argc, char *argv[])
   }
 
   if (checktree) {
-    cout << "tree seems ok\n";
+    std::cout << "tree seems ok\n";
     return;     // done
   }
 
   // generate the original input
   int size;
   VariantCursor cursor = m.write(size);
-  cout << "orig: " << stringf("%10d", size) << " ";
-  flush(cout);
+  std::cout << "orig: " << stringf("%10d", size) << " ";
+  flush(std::cout);
 
   // confirm it is the same as the given original
   if (0!=system(stringc << "cmp -s \'" << m.sourceFname << "\' \'"
@@ -332,19 +332,19 @@ void entry(int argc, char *argv[])
   try {
     m.minimize();
 
-    cout << "\ndone!  writing minimized version to " << m.sourceFname << "\n";
+    std::cout << "\ndone!  writing minimized version to " << m.sourceFname << "\n";
   }
   catch (XCtrlC &) {
     HANDLER();
-    cout << "\nuser pressed ctrl-c;\n";
-    cout << m.sourceFname << " will be left as the smallest variant that passed the test\n";
+    std::cout << "\nuser pressed ctrl-c;\n";
+    std::cout << m.sourceFname << " will be left as the smallest variant that passed the test\n";
   }
 
   // write the final minimized version
   cursor = m.write(size);
   xassert(cursor->data == VR_PASSED);
 
-  cout << "passing=" << m.passingTests
+  std::cout << "passing=" << m.passingTests
        << ", failing=" << m.failingTests
        << ", total=" << (m.passingTests+m.failingTests)
        << ", inputSum=" << m.testInputSum

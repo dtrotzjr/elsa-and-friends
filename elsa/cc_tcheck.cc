@@ -1845,7 +1845,7 @@ CompoundType *checkClasskeyAndName(
       // override any mismatching prior decl
       if (definition && !templateArgs) {
         TRACE("env", "changing " << ct->keywordAndName() <<
-                     " to a " << toString(keyword) << endl);
+                     " to a " << toString(keyword) << std::endl);
         ct->keyword = (CompoundType::Keyword)keyword;
       }
     }
@@ -2211,8 +2211,8 @@ void TS_classSpec::tcheckIntoCompound(
     // we're finished constructing the inheritance hierarchy
     if (tracingSys("printHierarchies")) {
       string h1 = ct->renderSubobjHierarchy();
-      cout << "// ----------------- " << ct->name << " -------------------\n";
-      cout << h1;
+      std::cout << "// ----------------- " << ct->name << " -------------------\n";
+      std::cout << h1;
 
       // for debugging; this checks that the 'visited' flags are being
       // cleared properly, among other things
@@ -5450,7 +5450,7 @@ static bool allNonMethods(SObjList<Variable> &set)
 static bool allMethods(SObjList<Variable> &set)
 {
   SFOREACH_OBJLIST(Variable, set, iter) {
-//      cout << "iter.data()->type->asFunctionType() " << iter.data()->type->asFunctionType()->toCString() << endl;
+//      std::cout << "iter.data()->type->asFunctionType() " << iter.data()->type->asFunctionType()->toCString() << std::endl;
     if (!iter.data()->type->asFunctionType()->isMethod()) return false;
   }
   return true;

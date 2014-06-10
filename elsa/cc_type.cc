@@ -178,7 +178,7 @@ DOWNCAST_IMPL(AtomicType, DependentQType)
 
 void AtomicType::gdb() const
 {
-  cout << toString() << endl;
+  std::cout << toString() << std::endl;
 }
 
 
@@ -1210,7 +1210,7 @@ string cvToString(CVFlags cv)
 
 void BaseType::gdb() const
 {
-  cout << toString() << endl;
+  std::cout << toString() << std::endl;
 }
 
 string BaseType::toString() const 

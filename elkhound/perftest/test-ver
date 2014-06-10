@@ -113,8 +113,8 @@ if [ "$directory" = "2002-04-18_08:45_-0700" ]; then
      // added link
 
      // TODO: I think this code path is unusual; confirm by measurement
--    cout << "got here\n";
-+    //cout << "got here\n";
+-    std::cout << "got here\n";
++    //std::cout << "got here\n";
 
      // for each 'finished' parser (i.e. those not still on
      // the worklist)

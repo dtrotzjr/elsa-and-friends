@@ -1,6 +1,6 @@
 // t0259.cc
 // tricky "duplicate" definitions
-// needed for ostream
+// needed for std::ostream
 
 
 template <class T>

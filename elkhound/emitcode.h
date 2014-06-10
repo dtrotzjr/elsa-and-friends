@@ -4,13 +4,13 @@
 #ifndef EMITCODE_H
 #define EMITCODE_H
   
-#include <fstream.h>      // ofstream
+#include <fstream>      // std::ofstream
 #include "str.h"          // stringBuffer
 #include "srcloc.h"       // SourceLoc
 
 class EmitCode : public stringBuilder {
 private:     // data
-  ofstream os;         // stream to write to
+  std::ofstream os;         // stream to write to
   string fname;        // filename for emitting #line
   int line;            // current line number
 

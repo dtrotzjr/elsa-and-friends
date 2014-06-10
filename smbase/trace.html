@@ -47,7 +47,7 @@ If <TT>NDEBUG</TT> is #defined, this expands to nothing.  But if it
 is not, then this expands to something like:
 <pre>
   if (tracingSys("weapons")) {
-    cout &lt;&lt; "%%% weapons: " &lt;&lt; "about to fire proton torpedo " &lt;&lt; torpNum &lt;&lt; endl;
+    std::cout &lt;&lt; "%%% weapons: " &lt;&lt; "about to fire proton torpedo " &lt;&lt; torpNum &lt;&lt; std::endl;
   }
 </pre>
 
@@ -62,7 +62,7 @@ Several things are noteworthy about the expansion:
     information, like <tt>torpNum</tt> above.  If you need <tt>printf</tt>-style
     formatting, use the <tt>stringf</tt> function in the 
     <a href="str.h">str</a> module.
-<li>Since it ends with <tt>endl</tt>, it prints the newline automatically,
+<li>Since it ends with <tt>std::endl</tt>, it prints the newline automatically,
     <em>and</em> flushes the output stream.  That way you'll see the output
     even if the program crashes on the next line.
 <li>The <tt>tracingSys</tt> function can be used to explicitly query whether

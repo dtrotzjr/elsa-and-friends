@@ -4,7 +4,7 @@
 // of a template class with non-type parameter,
 // that method being defined out of line
 
-// needed for ostream, std::allocator::allocate()
+// needed for std::ostream, std::allocator::allocate()
 
 template <int I>
 class A {

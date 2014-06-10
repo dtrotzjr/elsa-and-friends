@@ -12,7 +12,7 @@ ASTSpecFile::~ASTSpecFile()
   forms.deleteAll();
 }
 
-void ASTSpecFile::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void ASTSpecFile::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, ASTSpecFile);
 
@@ -43,7 +43,7 @@ char const * const ToplevelForm::kindNames[ToplevelForm::NUM_KINDS] = {
   "TF_enum",
 };
 
-void ToplevelForm::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void ToplevelForm::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
 }
 
@@ -53,7 +53,7 @@ TF_verbatim::~TF_verbatim()
 {
 }
 
-void TF_verbatim::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void TF_verbatim::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, TF_verbatim);
 
@@ -76,7 +76,7 @@ TF_impl_verbatim::~TF_impl_verbatim()
 {
 }
 
-void TF_impl_verbatim::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void TF_impl_verbatim::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, TF_impl_verbatim);
 
@@ -101,7 +101,7 @@ TF_class::~TF_class()
   ctors.deleteAll();
 }
 
-void TF_class::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void TF_class::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, TF_class);
 
@@ -129,7 +129,7 @@ TF_option::~TF_option()
   }
 }
 
-void TF_option::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void TF_option::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, TF_option);
 
@@ -155,7 +155,7 @@ TF_custom::~TF_custom()
   delete cust;
 }
 
-void TF_custom::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void TF_custom::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, TF_custom);
 
@@ -181,7 +181,7 @@ TF_enum::~TF_enum()
   }
 }
 
-void TF_enum::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void TF_enum::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, TF_enum);
 
@@ -211,7 +211,7 @@ ASTClass::~ASTClass()
   decls.deleteAll();
 }
 
-void ASTClass::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void ASTClass::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, ASTClass);
 
@@ -244,7 +244,7 @@ AccessMod::~AccessMod()
   }
 }
 
-void AccessMod::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void AccessMod::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, AccessMod);
 
@@ -273,7 +273,7 @@ char const * const Annotation::kindNames[Annotation::NUM_KINDS] = {
   "CustomCode",
 };
 
-void Annotation::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void Annotation::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
 }
 
@@ -284,7 +284,7 @@ UserDecl::~UserDecl()
   delete amod;
 }
 
-void UserDecl::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void UserDecl::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, UserDecl);
 
@@ -311,7 +311,7 @@ CustomCode::~CustomCode()
 {
 }
 
-void CustomCode::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void CustomCode::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, CustomCode);
 
@@ -337,7 +337,7 @@ CtorArg::~CtorArg()
 {
 }
 
-void CtorArg::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void CtorArg::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, CtorArg);
 
@@ -365,7 +365,7 @@ BaseClass::~BaseClass()
 {
 }
 
-void BaseClass::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void BaseClass::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, BaseClass);
 

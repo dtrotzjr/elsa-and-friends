@@ -41,6 +41,6 @@ int main()
 //    int y = 2;
   A<int> a;
   y = a.f(0, x2);
-//    cout << "y:" << y << endl;
+//    std::cout << "y:" << y << std::endl;
   return 0;
 }

@@ -16,7 +16,7 @@ for n in           \
   ios              \
   iosfwd           \
   iostream         \
-  istream          \
+  std::istream          \
   iterator         \
   limits           \
   list             \
@@ -25,7 +25,7 @@ for n in           \
   memory           \
   new              \
   numeric          \
-  ostream          \
+  std::ostream          \
   queue            \
   set              \
   sstream          \

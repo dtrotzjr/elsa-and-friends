@@ -7,7 +7,7 @@
 #include "strutil.h"     // string, replace
 #include "reporterr.h"   // silentReportError
 
-#include <iostream.h>    // cout
+#include <iostream>    // std::cout
 #include <ctype.h>       // isspace
 
 
@@ -219,7 +219,7 @@ void Test::feed(CC &cc, rostring origSrc)
 {
   char const *src = toCStr(origSrc);
 
-  //cout << "trying: " << src << endl;
+  //std::cout << "trying: " << src << std::endl;
   while (*src) {
     // feed it in 10 char increments, to test split processing too
     int len = min(strlen(src), 10);
@@ -346,7 +346,7 @@ int Test::main()
   badname(")");
   badname("main");
 
-  cout << "\nccsstr: all tests PASSED\n";
+  std::cout << "\nccsstr: all tests PASSED\n";
 
   return 0;
 }

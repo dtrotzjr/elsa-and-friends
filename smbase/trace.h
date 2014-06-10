@@ -5,7 +5,7 @@
 #ifndef TRACE_H
 #define TRACE_H
 
-#include <iostream.h>     // ostream
+#include <iostream>     // std::ostream
 
 
 // add a subsystem to the list of those being traced
@@ -21,18 +21,18 @@ bool tracingSys(char const *sysName);
 void traceRemoveAll();
 
 
-// trace; if the named system is active, this yields cout (after
+// trace; if the named system is active, this yields std::cout (after
 // sending a little output to identify the system); if not, it
-// yields an ostream attached to /dev/null; when using this
+// yields an std::ostream attached to /dev/null; when using this
 // method, it is up to you to put the newline
-ostream &trace(char const *sysName);
+std::ostream &trace(char const *sysName);
 
 // give an entire string to trace; do *not* put a newline in it
 // (the tracer will do that)
 void trstr(char const *sysName, char const *traceString);
 
 // trace macro which disables itself when NDEBUG is true,
-// and automatically supplies 'endl' when it's not true
+// and automatically supplies 'std::endl' when it's not true
 //
 // dsw: debugging *weakly* implies tracing: if we are debugging, do
 // tracing unless otherwise specified
@@ -48,7 +48,7 @@ void trstr(char const *sysName, char const *traceString);
   #define DO_TRACE 0
 #endif
 #if DO_TRACE != 0
-  #define TRACE(tag, exp) trace(tag) << exp << endl /* user ; */
+  #define TRACE(tag, exp) trace(tag) << exp << std::endl /* user ; */
 #else
   #define TRACE(tag, exp) ((void)0)
 #endif
@@ -57,7 +57,7 @@ void trstr(char const *sysName, char const *traceString);
 // special for "progress" tracing; prints time too;
 // 'level' is level of detail -- 1 is highest level, 2 is
 // more refined (and therefore usually not printed), etc.
-ostream &traceProgress(int level=1);
+std::ostream &traceProgress(int level=1);
 
 
 // add one or more subsystems, separated by commas

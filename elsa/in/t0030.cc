@@ -87,7 +87,7 @@ class ios {
 };
 
 // and then typedef'ing that outside the class scope
-typedef ios::seek_dir _seek_dir;
+typedef std::ios::seek_dir _seek_dir;
 
 
 class streammarker {
@@ -115,9 +115,9 @@ void call_delete()
 }
 
 
-class ostream {
+class std::ostream {
     // problems with "this"?
-    ostream& operator<<(unsigned char c) { return (*this) << (char)c; }
+    std::ostream& operator<<(unsigned char c) { return (*this) << (char)c; }
 };
 
 

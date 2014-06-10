@@ -9,7 +9,7 @@
 #include "sm_flexlexer.h"       // yyFlexLexer
 #include "str.h"                // string
 #include "astxml_tokens.h"
-#include "fstream.h"            // ifstream
+#include <fstream>            // std::ifstream
 
 class AstXmlLexer : private yyFlexLexer {
   public:
@@ -30,7 +30,7 @@ class AstXmlLexer : private yyFlexLexer {
   // this is yytext
   char const *currentText() { return this->YYText(); }
   // this is yyrestart
-  void restart(ifstream *in) { this->yyrestart(in); }
+  void restart(std::ifstream *in) { this->yyrestart(in); }
 
   int tok(ASTXMLTokenType kind);
   int svalTok(ASTXMLTokenType t);

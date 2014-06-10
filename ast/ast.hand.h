@@ -36,7 +36,7 @@ public:
   ASTSpecFile(ASTList<ToplevelForm> *_forms) : forms(_forms) {}
   ~ASTSpecFile() {}
 
-  void debugPrint(ostream &os, int indent) const;
+  void debugPrint(std::ostream &os, int indent) const;
 };
 
 
@@ -51,7 +51,7 @@ public:
   DECL_AST_DOWNCASTS(TF_verbatim, TF_VERBATIM)
   DECL_AST_DOWNCASTS(ASTClass, ASTCLASS)
 
-  virtual void debugPrint(ostream &os, int indent) const;
+  virtual void debugPrint(std::ostream &os, int indent) const;
 };
 
 class TF_verbatim : public ToplevelForm {
@@ -67,7 +67,7 @@ public:
   virtual Kind kind() const { return TF_VERBATIM; }
   enum { TYPE_TAG = TF_VERBATIM };
 
-  virtual void debugPrint(ostream &os, int indent) const;
+  virtual void debugPrint(std::ostream &os, int indent) const;
 };
 
 class ASTClass : public ToplevelForm {
@@ -87,7 +87,7 @@ public:
   virtual Kind kind() const { return ASTCLASS; }
   enum { TYPE_TAG = ASTCLASS };
 
-  virtual void debugPrint(ostream &os, int indent) const;
+  virtual void debugPrint(std::ostream &os, int indent) const;
   
   public: bool hasChildren() const { return ctors.isNotEmpty(); }
 };
@@ -108,7 +108,7 @@ public:
   {}
   ~UserDecl() {}
 
-  void debugPrint(ostream &os, int indent) const;
+  void debugPrint(std::ostream &os, int indent) const;
 };
 
 
@@ -124,7 +124,7 @@ public:
   {}
   ~ASTCtor() {}
 
-  void debugPrint(ostream &os, int indent) const;
+  void debugPrint(std::ostream &os, int indent) const;
   
   public: string kindName() const;
 };
@@ -144,7 +144,7 @@ public:
   {}
   ~CtorArg() {}
 
-  void debugPrint(ostream &os, int indent) const;
+  void debugPrint(std::ostream &os, int indent) const;
 };
 
 #endif // AST_HAND_H

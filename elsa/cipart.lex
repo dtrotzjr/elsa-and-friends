@@ -421,7 +421,7 @@ int main(int argc, char *argv[])
     return 0;
   }
   catch (xBase &x) {
-    cout << x.why() << endl;
+    std::cout << x.why() << std::endl;
     return 4;
   }
 }

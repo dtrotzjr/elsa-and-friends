@@ -8,17 +8,17 @@
 #include "cc_ast.h"             // C++ AST; this module
 #include "str.h"                // stringBuilder
 
-#include <iostream.h>           // ostream
+#include <iostream>           // std::ostream
 
 // this virtual semi-abstract class is intended to act as a
-// "superclass" for ostream, stringBuilder, and any other "output
+// "superclass" for std::ostream, stringBuilder, and any other "output
 // stream" classes
 class OutStream {
   public:
   virtual ~OutStream() {}
 
   // special-case methods
-  virtual OutStream & operator << (ostream& (*manipfunc)(ostream& outs)) = 0;
+  virtual OutStream & operator << (std::ostream& (*manipfunc)(std::ostream& outs)) = 0;
   virtual void flush() = 0;
 
   // special method to support rostring
@@ -45,8 +45,8 @@ class StringBuilderOutStream : public OutStream {
   StringBuilderOutStream(stringBuilder &buffer0) : buffer(buffer0) {}
 
   // special-case methods
-  virtual StringBuilderOutStream & operator << (ostream& (*manipfunc)(ostream& outs)) {
-    buffer << "\n";             // assume that it is endl
+  virtual StringBuilderOutStream & operator << (std::ostream& (*manipfunc)(std::ostream& outs)) {
+    buffer << "\n";             // assume that it is std::endl
     return *this;
   }
   virtual void flush() {}       // no op
@@ -73,13 +73,13 @@ class StringBuilderOutStream : public OutStream {
 };
 
 class OStreamOutStream : public OutStream {
-  ostream &out;
+  std::ostream &out;
 
   public:
-  OStreamOutStream(ostream &out0) : out(out0) {}
+  OStreamOutStream(std::ostream &out0) : out(out0) {}
 
   // special-case methods
-  virtual OStreamOutStream & operator << (ostream& (*manipfunc)(ostream& outs)) {
+  virtual OStreamOutStream & operator << (std::ostream& (*manipfunc)(std::ostream& outs)) {
     out << manipfunc;
     return *this;
   }
@@ -128,7 +128,7 @@ class CodeOutStream : public OutStream {
   void finish();
 
   // OutStream methods
-  CodeOutStream & operator << (ostream& (*manipfunc)(ostream& outs));
+  CodeOutStream & operator << (std::ostream& (*manipfunc)(std::ostream& outs));
   void flush() { out.flush(); }
   CodeOutStream & operator << (char const *message);
 
@@ -186,7 +186,7 @@ class TreeWalkOutStream : public OutStream {
 
   public:
   // OutStream methods
-  virtual TreeWalkOutStream & operator << (ostream& (*manipfunc)(ostream& outs));
+  virtual TreeWalkOutStream & operator << (std::ostream& (*manipfunc)(std::ostream& outs));
   virtual void flush() { out.flush(); }
 
   // special method to support rostring
@@ -367,12 +367,12 @@ void printSTemplateArgument(PrintEnv &env, STemplateArgument const *sta);
 
 #define PRINT_AST(AST)                \
   do {                                \
-    OutStream out0(cout);         \
+    OutStream out0(std::cout);         \
     TypePrinter typePrinter0;         \
     PrintEnv penv0(typePrinter0);     \
     if (AST) AST->print(penv0, out0); \
     else out0 << "(PRINT_AST:null)";  \
-    out0 << endl;                     \
+    out0 << std::endl;                     \
   } while(0)
 
 #endif // CC_PRINT_H

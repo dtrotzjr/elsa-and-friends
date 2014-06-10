@@ -523,7 +523,7 @@ CValue Expression::constEval(ConstEval &env) const
   #else       // debugging
     #warning debugging code is enabled
     CValue ret = iconstEval(env);
-    cout << "const-eval of `" << exprToString() << "' is " << ret.asString() << endl;
+    std::cout << "const-eval of `" << exprToString() << "' is " << ret.asString() << std::endl;
     return ret;
   #endif
 }

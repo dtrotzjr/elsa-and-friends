@@ -14,17 +14,17 @@
 
 void gdbScopeSeq(ScopeSeq &ss)
 {
-  cout << "scope sequence" << endl;
+  std::cout << "scope sequence" << std::endl;
   for(int i=0; i<ss.length(); ++i) {
     Scope *scope = ss[i];
     xassert(scope);
-    cout << "\t[" << i << "] ";
+    std::cout << "\t[" << i << "] ";
     scope->gdb();
   }
 }
 
 
-inline ostream& operator<< (ostream &os, SourceLoc sl)
+inline std::ostream& operator<< (std::ostream &os, SourceLoc sl)
   { return os << toString(sl); }
 
 
@@ -1243,13 +1243,13 @@ void Env::retractScope(Scope *s)
 
 void Env::gdbScopes()
 {
-  cout << "Scopes and variables (no __-names), beginning with innermost" << endl;
+  std::cout << "Scopes and variables (no __-names), beginning with innermost" << std::endl;
   for (int i=0; i<scopes.count(); ++i) {
     Scope *s = scopes.nth(i);
-    cout << "scope " << i << ", " << s->desc() << endl;
+    std::cout << "scope " << i << ", " << s->desc() << std::endl;
     
     if (s->isDelegated()) {
-      cout << "  (DELEGATED)" << endl;
+      std::cout << "  (DELEGATED)" << std::endl;
     }
 
     for (StringRefMap<Variable>::Iter iter = s->getVariableIter();
@@ -1260,20 +1260,20 @@ void Env::gdbScopes()
 
       Variable *value = iter.value();
       if (value->hasFlag(DF_NAMESPACE)) {
-        cout << "  " << iter.key() << ": " << value->scope->desc() << endl;
+        std::cout << "  " << iter.key() << ": " << value->scope->desc() << std::endl;
       }
       else {
-        cout << "  " << iter.key()
+        std::cout << "  " << iter.key()
              << ": " << value->toString()
              << stringf(" (%p)", value);
-  //        cout << "value->serialNumber " << value->serialNumber;
-        cout << endl;
+  //        std::cout << "value->serialNumber " << value->serialNumber;
+        std::cout << std::endl;
       }
     }
 
     if (s->curCompound &&
         s->curCompound->parameterizingScope) {
-      cout << "  DELEGATES to " << s->curCompound->parameterizingScope->desc() << endl;
+      std::cout << "  DELEGATES to " << s->curCompound->parameterizingScope->desc() << std::endl;
     }
   }
 }
@@ -5355,7 +5355,7 @@ Type *Env::unimp(rostring msg)
 
   // always print this immediately, because in some cases I will
   // segfault (typically deref'ing NULL) right after printing this
-  cout << toString(loc()) << ": unimplemented: " << msg << instLoc << endl;
+  std::cout << toString(loc()) << ": unimplemented: " << msg << instLoc << std::endl;
 
   breaker();
   errors.addError(new ErrorMsg(

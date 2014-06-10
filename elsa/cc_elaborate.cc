@@ -862,7 +862,7 @@ void ElabVisitor::completeNoArgMemberInits(Function *ctor, CompoundType *ct)
       }
       newInits.prepend(mi);
     } else {
-//        cerr << "Omitting a direct base that is also a virtual base" << endl;
+//        std::cerr << "Omitting a direct base that is also a virtual base" << std::endl;
     }
   }
   // FIX: virtual bases omitted for now
@@ -1022,7 +1022,7 @@ MR_func *ElabVisitor::makeCopyCtorBody(CompoundType *ct, Variable *ctor)
         inits = inits->prepend(mi);
       }
       else {
-        //cerr << "Omitting a direct base that is also a virtual base" << endl;
+        //std::cerr << "Omitting a direct base that is also a virtual base" << std::endl;
       }
     }
 

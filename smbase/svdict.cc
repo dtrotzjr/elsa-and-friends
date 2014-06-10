@@ -361,10 +361,10 @@ void StringVoidDict::selfCheck() const
 }
 
 
-void StringVoidDict::insertOstream(ostream &os) const
+void StringVoidDict::insertOstream(std::ostream &os) const
 {
   FOREACH_ITERC(*this, entry) {
-    os << entry.key() << " = " << entry.value() << endl;
+    os << entry.key() << " = " << entry.value() << std::endl;
   }
 }
 
@@ -519,11 +519,11 @@ void entry()
     }
   }
 
-  cout << "final size: " << size
+  std::cout << "final size: " << size
        << "\ncollisions: " << collisions
        << "\n";
 
-  cout << "all tests passed\n";
+  std::cout << "all tests passed\n";
 }
 
 USUAL_MAIN

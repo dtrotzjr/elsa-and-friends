@@ -4,8 +4,8 @@
 # The purpose of this script is basically to "fix" flex's output
 # in a number of ways.
 #
-# 1. It changes a forward declaration of istream into a proper
-# #include directive.  In current C++ libraries, istream is not
+# 1. It changes a forward declaration of std::istream into a proper
+# #include directive.  In current C++ libraries, std::istream is not
 # a class but rather a template specialization.
 #
 # 2. Fix the "yyclass" option output so that the resulting module
@@ -151,8 +151,8 @@ for ($i=0; $i < @lines; $i++) {
 
   # this is stateless because it does not occur in the cygwin
   # flex output (they have a different fix)
-  if ($line =~ m/class istream;/) {
-    print OUT ("#include <iostream.h>      // class istream\n");
+  if ($line =~ m/class std::istream;/) {
+    print OUT ("#include <iostream>      // class std::istream\n");
     next;
   }
 

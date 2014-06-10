@@ -5,7 +5,7 @@
 #include "strutil.h"       // quoted
 
 // ----------- debugPrint helpers -----------------------
-ostream &ind(ostream &os, int indent)
+std::ostream &ind(std::ostream &os, int indent)
 {
   while (indent--) {
     os << " ";
@@ -15,13 +15,13 @@ ostream &ind(ostream &os, int indent)
 
 
 void debugPrintStr(string const &s, char const *name,
-                   ostream &os, int indent)
+                   std::ostream &os, int indent)
 {
   debugPrintStr(s.c_str(), name, os, indent);
 }
 
 void debugPrintStr(char const *s, char const *name,
-                   ostream &os, int indent)
+                   std::ostream &os, int indent)
 {
   string s1((s) ? string(s) : string("NULL"));
   ind(os, indent) << name << " = " << quoted(s1) << "\n";
@@ -29,7 +29,7 @@ void debugPrintStr(char const *s, char const *name,
 
 
 void debugPrintCStr(char const *s, char const *name,
-                    ostream &os, int indent)
+                    std::ostream &os, int indent)
 {
   ind(os, indent) << name << " = ";
   if (s) {
@@ -44,7 +44,7 @@ void debugPrintCStr(char const *s, char const *name,
 
 template <class STR>
 void debugPrintStringList(ASTList<STR> const &list, char const *name,
-                          ostream &os, int indent)
+                          std::ostream &os, int indent)
 {
   ind(os, indent) << name << ": ";
   {
@@ -61,13 +61,13 @@ void debugPrintStringList(ASTList<STR> const &list, char const *name,
 
 
 void debugPrintList(ASTList<string> const &list, char const *name,
-                    ostream &os, int indent)
+                    std::ostream &os, int indent)
 {
   debugPrintStringList(list, name, os, indent);
 }
 
 void debugPrintList(ASTList<LocString> const &list, char const *name,
-                    ostream &os, int indent)
+                    std::ostream &os, int indent)
 {
   debugPrintStringList(list, name, os, indent);
 }
@@ -75,7 +75,7 @@ void debugPrintList(ASTList<LocString> const &list, char const *name,
 
 // ----------- xmlPrint helpers -----------------------
 void xmlPrintStr(string const &s, char const *name,
-                 ostream &os, int indent)
+                 std::ostream &os, int indent)
 {
   ind(os, indent) << "<member type=string name = \"" << name << "\">\n";
   // dsw: quoted might add another layer of quotes.
@@ -86,7 +86,7 @@ void xmlPrintStr(string const &s, char const *name,
 
 template <class STR>
 void xmlPrintStringList(ASTList<STR> const &list, char const *name,
-                        ostream &os, int indent)
+                        std::ostream &os, int indent)
 {
   ind(os, indent) << "<member type=stringList name = \"" << name << "\">\n";
   {
@@ -101,19 +101,19 @@ void xmlPrintStringList(ASTList<STR> const &list, char const *name,
 
 
 void xmlPrintList(ASTList<string> const &list, char const *name,
-                  ostream &os, int indent)
+                  std::ostream &os, int indent)
 {
   xmlPrintStringList(list, name, os, indent);
 }
 
 void xmlPrintList(ASTList<LocString> const &list, char const *name,
-                  ostream &os, int indent)
+                  std::ostream &os, int indent)
 {
   xmlPrintStringList(list, name, os, indent);
 }
 
 
-void xmlPrintPointer(ostream &os, char const *label, void const *p)
+void xmlPrintPointer(std::ostream &os, char const *label, void const *p)
 {
   if (!p) {
     // sm: previously, the code for this function just inserted 'p'

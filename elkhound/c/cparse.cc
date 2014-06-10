@@ -1,7 +1,7 @@
 // cparse.cc            see license.txt for copyright and terms of use
 // code for cparse.h
 
-#include <iostream.h>    // cout
+#include <iostream>    // std::cout
 
 #include "cparse.h"      // this module
 #include "cc_lang.h"     // CCLang
@@ -41,7 +41,7 @@ void ParseEnv::addType(StringRef type)
     // this happens for C++ code which has both the implicit
     // and explicit typedefs (and/or, explicit 'class Foo' mentions
     // in places)
-    //cout << "duplicate entry for " << type << " -- will ignore\n";
+    //std::cout << "duplicate entry for " << type << " -- will ignore\n";
   }
   else {
     h->add(type, (void*)type);
@@ -68,7 +68,7 @@ void ParseEnv::declareClassTag(StringRef tagName)
   // TYPE/NAME
   if (lang.tagsAreTypes) {
     #ifndef NDEBUG
-    trace("cc") << "defined new struct/class tag as type " << tagName << endl;
+    trace("cc") << "defined new struct/class tag as type " << tagName << std::endl;
     #endif
     addType(tagName);
   }

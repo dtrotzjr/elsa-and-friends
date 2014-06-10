@@ -47,7 +47,7 @@ public:      // funcs
 
   ASTSpecFile *clone() const;
 
-  void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
 };
 
@@ -77,7 +77,7 @@ public:      // funcs
 
   virtual ToplevelForm* clone() const=0;
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
 };
 
@@ -93,7 +93,7 @@ public:      // funcs
   virtual Kind kind() const { return TF_VERBATIM; }
   enum { TYPE_TAG = TF_VERBATIM };
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   virtual TF_verbatim *clone() const;
 
@@ -111,7 +111,7 @@ public:      // funcs
   virtual Kind kind() const { return TF_IMPL_VERBATIM; }
   enum { TYPE_TAG = TF_IMPL_VERBATIM };
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   virtual TF_impl_verbatim *clone() const;
 
@@ -130,7 +130,7 @@ public:      // funcs
   virtual Kind kind() const { return TF_CLASS; }
   enum { TYPE_TAG = TF_CLASS };
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   virtual TF_class *clone() const;
 
@@ -150,7 +150,7 @@ public:      // funcs
   virtual Kind kind() const { return TF_OPTION; }
   enum { TYPE_TAG = TF_OPTION };
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   virtual TF_option *clone() const;
 
@@ -168,7 +168,7 @@ public:      // funcs
   virtual Kind kind() const { return TF_CUSTOM; }
   enum { TYPE_TAG = TF_CUSTOM };
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   virtual TF_custom *clone() const;
 
@@ -187,7 +187,7 @@ public:      // funcs
   virtual Kind kind() const { return TF_ENUM; }
   enum { TYPE_TAG = TF_ENUM };
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   virtual TF_enum *clone() const;
 
@@ -213,7 +213,7 @@ public:      // funcs
 
   ASTClass *clone() const;
 
-  void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   public:  string classKindName() const;
 };
@@ -253,7 +253,7 @@ public:      // funcs
 
   AccessMod *clone() const;
 
-  void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   public:  bool hasMod(char const *mod) const;
   public:  bool hasModPrefix(char const *mod) const;
@@ -282,7 +282,7 @@ public:      // funcs
 
   virtual Annotation* clone() const=0;
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
 };
 
@@ -300,7 +300,7 @@ public:      // funcs
   virtual Kind kind() const { return USERDECL; }
   enum { TYPE_TAG = USERDECL };
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   virtual UserDecl *clone() const;
 
@@ -321,7 +321,7 @@ public:      // funcs
   virtual Kind kind() const { return CUSTOMCODE; }
   enum { TYPE_TAG = CUSTOMCODE };
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   virtual CustomCode *clone() const;
 
@@ -347,7 +347,7 @@ public:      // funcs
 
   CtorArg *clone() const;
 
-  void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
 };
 
@@ -368,7 +368,7 @@ public:      // funcs
 
   BaseClass *clone() const;
 
-  void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
 };
 

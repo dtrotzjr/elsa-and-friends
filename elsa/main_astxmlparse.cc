@@ -4,7 +4,7 @@
 #include "xmlhelp.h"            // toXml_int etc.
 #include "xml.h"                // XmlReaderManager
 #include "cc_type_xml.h"        // TypeXmlReader
-#include "fstream.h"            // ifstream
+#include <fstream>            // std::ifstream
 #include "strutil.h"            // parseQuotedString
 #include "astxml_lexer.h"       // AstXmlLexer
 #include "cc.ast.gen.h"         // TranslationUnit, etc.
@@ -92,7 +92,7 @@ bool ASTXmlReader::registerAttribute(void *target, int kind, int attr, char cons
 TranslationUnit *astxmlparse(StringTable &strTable, char const *inputFname)
 {
   // make reader manager
-  ifstream in(inputFname);
+  std::ifstream in(inputFname);
   AstXmlLexer lexer(inputFname);
   lexer.restart(&in);
   XmlReaderManager manager(inputFname, lexer, strTable);

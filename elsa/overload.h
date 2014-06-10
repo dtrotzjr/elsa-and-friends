@@ -23,14 +23,14 @@ class TemplCandidates;
 // debugging output support
 extern int overloadNesting;      // overload resolutions ongoing
 
-// ostream with line prefix already printed
-ostream &overloadTrace();
+// std::ostream with line prefix already printed
+std::ostream &overloadTrace();
 
 #ifndef NDEBUG
   class OverloadIndTrace {
   public:
     OverloadIndTrace(char const *msg) {
-      overloadTrace() << msg << endl;
+      overloadTrace() << msg << std::endl;
       overloadNesting++;
     }
     ~OverloadIndTrace() {
@@ -45,7 +45,7 @@ ostream &overloadTrace();
 
   // just print a message at the current indentation
   #define OVERLOADTRACE(msg) \
-    overloadTrace() << msg << endl
+    overloadTrace() << msg << std::endl
 
 #else
   #define OVERLOADINDTRACE(msg) ((void)0)

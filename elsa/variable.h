@@ -266,7 +266,7 @@ public:
   // ML-style
   string toMLString() const;
 
-  // toString+newline to cout
+  // toString+newline to std::cout
   void gdb() const;
 
   // fully qualified but not mangled name

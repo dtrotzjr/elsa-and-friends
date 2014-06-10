@@ -7,7 +7,7 @@
 #include "strtokp.h"   // StrtokParse
 #include "nonport.h"   // getMilliseconds()
 
-#include <fstream.h>   // ofstream
+#include <fstream>   // std::ofstream
 #include <stdlib.h>    // getenv
 
 
@@ -18,8 +18,8 @@ static bool inited = false;
 static ObjList<string> tracers;
 
 // stream connected to /dev/null
-ofstream devNullObj("/dev/null");
-static ostream *devNull = &devNullObj;
+std::ofstream devNullObj("/dev/null");
+static std::ostream *devNull = &devNullObj;
 
 
 // initialize
@@ -33,7 +33,7 @@ static void init()
   // around and find out how
   // this leaks, and now that I'm checking for them, it's a little
   // annoying...
-  //devNull = new ofstream("/dev/null");
+  //devNull = new std::ofstream("/dev/null");
 
   inited = true;
 }
@@ -80,13 +80,13 @@ void traceRemoveAll()
 }  
 
 
-ostream &trace(char const *sysName)
+std::ostream &trace(char const *sysName)
 {
   init();
 
   if (tracingSys(sysName)) {
-    cout << "%%% " << sysName << ": ";
-    return cout;
+    std::cout << "%%% " << sysName << ": ";
+    return std::cout;
   }
   else {
     return *devNull;
@@ -96,11 +96,11 @@ ostream &trace(char const *sysName)
 
 void trstr(char const *sysName, char const *traceString)
 {
-  trace(sysName) << traceString << endl;
+  trace(sysName) << traceString << std::endl;
 }
 
 
-ostream &traceProgress(int level)
+std::ostream &traceProgress(int level)
 {
   if ( (level == 1) ||
        (level == 2 && tracingSys("progress2")) ) {
@@ -127,7 +127,7 @@ void traceAddMultiSys(char const *systemNames)
         traceRemoveSys(name);
       }
       else {
-        cout << "Currently, `" << name << "' is not being traced.\n";
+        std::cout << "Currently, `" << name << "' is not being traced.\n";
       }
     }
     

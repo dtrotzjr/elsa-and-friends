@@ -1,9 +1,9 @@
 // main.cc            see license.txt for copyright and terms of use
 // entry-point module for a program that parses C++
 
-#include <iostream.h>     // cout
+#include <iostream>     // std::cout
 #include <stdlib.h>       // exit, getenv, abort
-#include <fstream.h>      // ofstream
+#include <fstream>      // std::ofstream
 
 #include "trace.h"        // traceAddSys
 #include "parssppt.h"     // ParseTreeAndTokens, treeMain
@@ -62,7 +62,7 @@ bool DeclTypeChecker::visitDeclarator(Declarator *obj)
       !(obj->var->flags & (DF_GLOBAL | DF_MEMBER)) &&
       !obj->type->isArrayType()) {
     instances++;
-    cout << toString(obj->var->loc) << ": " << obj->var->name
+    std::cout << toString(obj->var->loc) << ": " << obj->var->name
          << " has type != var->type, but is not global or member or array\n";
   }
   return true;
@@ -133,13 +133,13 @@ public:
 
 // print out type annotations for every ast node that has a type
 class ToXmlASTVisitor_Types : public ToXmlASTVisitor {
-//    ostream &out;                 // for the <Link/> tags
+//    std::ostream &out;                 // for the <Link/> tags
   TypeToXml &ttx;
 
   public:
   ToXmlASTVisitor_Types
     (TypeToXml &ttx0,
-     ostream &out0,
+     std::ostream &out0,
      int &depth0,
      bool indent0 = false,
      bool ensureOneVisit0 = true)
@@ -275,9 +275,9 @@ void handle_xBase(Env &env, xBase &x)
 {
   // typically an assertion failure from the tchecker; catch it here
   // so we can print the errors, and something about the location
-  env.errors.print(cout);
-  cout << x << endl;
-  cout << "Failure probably related to code near " << env.locStr() << endl;
+  env.errors.print(std::cout);
+  std::cout << x << std::endl;
+  std::cout << "Failure probably related to code near " << env.locStr() << std::endl;
 
   // print all the locations on the scope stack; this is sometimes
   // useful when the env.locStr refers to some template code that
@@ -286,8 +286,8 @@ void handle_xBase(Env &env, xBase &x)
   // (unfortunately, env.instantiationLocStack isn't an option b/c
   // it will have been cleared by the automatic invocation of
   // destructors unwinding the stack...)
-  cout << "current location stack:\n";
-  cout << env.locationStackString();
+  std::cout << "current location stack:\n";
+  std::cout << env.locationStackString();
 
   // I changed from using exit(4) here to using abort() because
   // that way the multitest.pl script can distinguish them; the
@@ -326,7 +326,7 @@ char *myProcessArgs(int argc, char **argv, char const *additionalInfo)
   }
 
   if (argc != 2) {
-    cout << "usage: " << progName << " [options] input-file\n"
+    std::cout << "usage: " << progName << " [options] input-file\n"
             "  options:\n"
             "    -tr <flags>:       turn on given tracing flags (comma-separated)\n"
          << (additionalInfo? additionalInfo : "");
@@ -459,7 +459,7 @@ void doit(int argc, char **argv)
       sizeof(long) != 4) {
     // we are running a regression test, and the testcase is known to
     // fail due to dependence on architecture parameters, so skip it
-    cout << "skipping test b/c this is not a 32-bit architecture\n";
+    std::cout << "skipping test b/c this is not a 32-bit architecture\n";
     exit(0);
   }
 
@@ -472,7 +472,7 @@ void doit(int argc, char **argv)
     unit = astxmlparse(strTable, inputFname);
     if (!unit) return;
 #else
-    cout << "XML features are not compiled in" << endl;
+    std::cout << "XML features are not compiled in" << std::endl;
     exit(1);
 #endif // XML
   }
@@ -521,14 +521,14 @@ void doit(int argc, char **argv)
       // the 'treeTop' is actually a PTreeNode pointer; print the
       // tree and bail
       PTreeNode *ptn = (PTreeNode*)treeTop;
-      ptn->printTree(cout, PTreeNode::PF_EXPAND);
+      ptn->printTree(std::cout, PTreeNode::PF_EXPAND);
       return;
     }
 
     // treeTop is a TranslationUnit pointer
     unit = (TranslationUnit*)treeTop;
 
-    //unit->debugPrint(cout, 0);
+    //unit->debugPrint(std::cout, 0);
 
     delete parseContext;
     delete tables;
@@ -538,11 +538,11 @@ void doit(int argc, char **argv)
 
   // print abstract syntax tree
   if (tracingSys("printAST")) {
-    unit->debugPrint(cout, 0);
+    unit->debugPrint(std::cout, 0);
   }
 
   //if (unit) {     // when "-tr trivialActions" it's NULL...
-  //  cout << "ambiguous nodes: " << numAmbiguousNodes(unit) << endl;
+  //  std::cout << "ambiguous nodes: " << numAmbiguousNodes(unit) << std::endl;
   //}
 
   if (tracingSys("stopAfterParse")) {
@@ -554,7 +554,7 @@ void doit(int argc, char **argv)
   BasicTypeFactory tfac;
   long tcheckTime = 0;
   if (tracingSys("no-typecheck")) {
-    cout << "no-typecheck" << endl;
+    std::cout << "no-typecheck" << std::endl;
   } else {
     SectionTimer timer(tcheckTime);
     Env env(strTable, lang, tfac, unit);
@@ -565,7 +565,7 @@ void doit(int argc, char **argv)
       HANDLER();
 
       // relay to handler in main()
-      cout << "in code near " << env.locStr() << ":\n";
+      std::cout << "in code near " << env.locStr() << ":\n";
       throw;
     }
     catch (x_assert &x) {
@@ -573,7 +573,7 @@ void doit(int argc, char **argv)
       
       if (env.errors.hasFromNonDisambErrors()) {
         if (tracingSys("expect_confused_bail")) {
-          cout << "got the expected confused/bail\n";
+          std::cout << "got the expected confused/bail\n";
           exit(0);
         }
 
@@ -594,12 +594,12 @@ void doit(int argc, char **argv)
         // Delta might see it.  If I am intending to minimize an assertion
         // failure, it's no good if Delta introduces an error.
         env.error("confused by earlier errors, bailing out");
-        env.errors.print(cout);
+        env.errors.print(std::cout);
         exit(4);
       }
 
       if (tracingSys("expect_xfailure")) {
-        cout << "got the expected xfailure\n";
+        std::cout << "got the expected xfailure\n";
         exit(0);
       }
 
@@ -631,7 +631,7 @@ void doit(int argc, char **argv)
 
     // print abstract syntax tree annotated with types
     if (tracingSys("printTypedAST")) {
-      unit->debugPrint(cout, 0);
+      unit->debugPrint(std::cout, 0);
     }
 
     // structural delta thing
@@ -649,9 +649,9 @@ void doit(int argc, char **argv)
     }
 
     // print errors and warnings
-    env.errors.print(cout);
+    env.errors.print(std::cout);
 
-    cout << "typechecking results:\n"
+    std::cout << "typechecking results:\n"
          << "  errors:   " << numErrors << "\n"
          << "  warnings: " << numWarnings << "\n";
 
@@ -671,7 +671,7 @@ void doit(int argc, char **argv)
         // ok
       }
       else {
-        cout << "collectLookupResults do not match:\n"
+        std::cout << "collectLookupResults do not match:\n"
              << "  source: " << env.collectLookupResults << "\n"
              << "  tcheck: " << nc.sb << "\n"
              ;
@@ -705,7 +705,7 @@ void doit(int argc, char **argv)
     if (tracingSys("declTypeCheck") || getenv("declTypeCheck")) {
       DeclTypeChecker vis;
       unit->traverse(vis.loweredVisitor);
-      cout << "instances of type != var->type: " << vis.instances << endl;
+      std::cout << "instances of type != var->type: " << vis.instances << std::endl;
     }
 
     if (tracingSys("stopAfterTCheck")) {
@@ -716,7 +716,7 @@ void doit(int argc, char **argv)
   // ----------------- elaboration ------------------
   long elaborationTime = 0;
   if (!lang.isCplusplus || tracingSys("no-elaborate")) {
-    cout << "no-elaborate" << endl;
+    std::cout << "no-elaborate" << std::endl;
   } 
   else {
     SectionTimer timer(elaborationTime);
@@ -738,7 +738,7 @@ void doit(int argc, char **argv)
 
     // print abstract syntax tree annotated with types
     if (tracingSys("printElabAST")) {
-      unit->debugPrint(cout, 0);
+      unit->debugPrint(std::cout, 0);
     }
     if (tracingSys("stopAfterElab")) {
       return;
@@ -764,15 +764,15 @@ void doit(int argc, char **argv)
   // dsw: pretty printing
   if (tracingSys("prettyPrint")) {
     traceProgress() << "dsw pretty print...\n";
-    OStreamOutStream out0(cout);
+    OStreamOutStream out0(std::cout);
     CodeOutStream codeOut(out0);
     TypePrinterC typePrinter;
     PrintEnv env(typePrinter, &codeOut);
-    cout << "---- START ----" << endl;
-    cout << "// -*-c++-*-" << endl;
+    std::cout << "---- START ----" << std::endl;
+    std::cout << "// -*-c++-*-" << std::endl;
     unit->print(env);
     codeOut.finish();
-    cout << "---- STOP ----" << endl;
+    std::cout << "---- STOP ----" << std::endl;
     traceProgress() << "dsw pretty print... done\n";
   }
 
@@ -782,10 +782,10 @@ void doit(int argc, char **argv)
     traceProgress() << "dsw xml print...\n";
     bool indent = tracingSys("xmlPrintAST-indent");
     int depth = 0;              // shared depth counter between printers
-    cout << "---- START ----" << endl;
+    std::cout << "---- START ----" << std::endl;
     if (tracingSys("xmlPrintAST-types")) {
-      TypeToXml xmlTypeVis(cout, depth, indent);
-      ToXmlASTVisitor_Types xmlVis_Types(xmlTypeVis, cout, depth, indent);
+      TypeToXml xmlTypeVis(std::cout, depth, indent);
+      ToXmlASTVisitor_Types xmlVis_Types(xmlTypeVis, std::cout, depth, indent);
       xmlTypeVis.astVisitor = &xmlVis_Types;
       ASTVisitor *vis = &xmlVis_Types;
       LoweredASTVisitor loweredXmlVis(&xmlVis_Types); // might not be used
@@ -794,7 +794,7 @@ void doit(int argc, char **argv)
       }
       unit->traverse(*vis);
     } else {
-      ToXmlASTVisitor xmlVis(cout, depth, indent);
+      ToXmlASTVisitor xmlVis(std::cout, depth, indent);
       ASTVisitor *vis = &xmlVis;
       LoweredASTVisitor loweredXmlVis(&xmlVis); // might not be used
       if (tracingSys("xmlPrintAST-lowered")) {
@@ -802,11 +802,11 @@ void doit(int argc, char **argv)
       }
       unit->traverse(*vis);
     }
-    cout << endl;
-    cout << "---- STOP ----" << endl;
+    std::cout << std::endl;
+    std::cout << "---- STOP ----" << std::endl;
     traceProgress() << "dsw xml print... done\n";
 #else
-    cout << "XML features are not compiled in" << endl;
+    std::cout << "XML features are not compiled in" << std::endl;
     exit(1);
 #endif // XML
   }
@@ -816,16 +816,16 @@ void doit(int argc, char **argv)
 //  #if XML
 //      traceProgress() << "dsw xml print...\n";
 //      bool indent = tracingSys("xmlPrintLoweredAST-indent");
-//      ToXmlASTVisitor xmlVis(cout, indent);
+//      ToXmlASTVisitor xmlVis(std::cout, indent);
 //      LoweredASTVisitor loweredXmlVis(&xmlVis);
 //      // FIX: do type visitor
-//      cout << "---- START ----" << endl;
+//      std::cout << "---- START ----" << std::endl;
 //      unit->traverse(loweredXmlVis);
-//      cout << endl;
-//      cout << "---- STOP ----" << endl;
+//      std::cout << std::endl;
+//      std::cout << "---- STOP ----" << std::endl;
 //      traceProgress() << "dsw xml print... done\n";
 //  #else
-//      cout << "XML features are not compiled in" << endl;
+//      std::cout << "XML features are not compiled in" << std::endl;
 //      exit(1);
 //  #endif // XML
 //    }
@@ -835,8 +835,8 @@ void doit(int argc, char **argv)
     TranslationUnit *u2 = unit->clone();
 
     if (tracingSys("cloneAST")) {
-      cout << "------- cloned AST --------\n";
-      u2->debugPrint(cout, 0);
+      std::cout << "------- cloned AST --------\n";
+      u2->debugPrint(std::cout, 0);
     }
 
     if (tracingSys("cloneCheck")) {
@@ -845,16 +845,16 @@ void doit(int argc, char **argv)
       u2->tcheck(env3);
 
       if (tracingSys("cloneTypedAST")) {
-        cout << "------- cloned typed AST --------\n";
-        u2->debugPrint(cout, 0);
+        std::cout << "------- cloned typed AST --------\n";
+        u2->debugPrint(std::cout, 0);
       }
 
       if (tracingSys("clonePrint")) {
-        OStreamOutStream out0(cout);
+        OStreamOutStream out0(std::cout);
         CodeOutStream codeOut(out0);
         TypePrinterC typePrinter;
         PrintEnv penv(typePrinter, &codeOut);
-        cout << "---- cloned pretty print ----" << endl;
+        std::cout << "---- cloned pretty print ----" << std::endl;
         u2->print(penv);
         codeOut.finish();
       }
@@ -864,11 +864,11 @@ void doit(int argc, char **argv)
   // test debugPrint but send the output to /dev/null (basically just
   // make sure it doesn't segfault or abort)
   if (tracingSys("testDebugPrint")) {
-    ofstream devnull("/dev/null");
+    std::ofstream devnull("/dev/null");
     unit->debugPrint(devnull, 0);
   }
 
-  cout << "parse=" << parseTime << "ms"
+  std::cout << "parse=" << parseTime << "ms"
        << " tcheck=" << tcheckTime << "ms"
        << " integ=" << integrityTime << "ms"
        << " elab=" << elaborationTime << "ms"
@@ -897,7 +897,7 @@ int main(int argc, char **argv)
   }
   catch (XUnimp &x) {
     HANDLER();
-    cout << x << endl;
+    std::cout << x << std::endl;
 
     // don't consider this the same as dying on an assertion failure;
     // I want to have tests in regrtest that are "expected" to fail
@@ -908,12 +908,12 @@ int main(int argc, char **argv)
     HANDLER();
     
     // similar to XUnimp
-    cout << x << endl;
+    std::cout << x << std::endl;
     return 10;
   }
   catch (xBase &x) {
     HANDLER();
-    cout << x << endl;
+    std::cout << x << std::endl;
     abort();
   }
 

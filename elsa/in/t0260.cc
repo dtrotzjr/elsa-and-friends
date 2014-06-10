@@ -1,6 +1,6 @@
 // t0260.cc
 // member func and template member func with similar signatures
-// needed for ostream
+// needed for std::ostream
 
 
 template <class T>

@@ -1,6 +1,6 @@
 // t0269.cc
 // tricky use of templatized overloaded ctor
-// from ostream, basic_string<char>::_M_destroy
+// from std::ostream, basic_string<char>::_M_destroy
 
 template <class T>
 struct A {

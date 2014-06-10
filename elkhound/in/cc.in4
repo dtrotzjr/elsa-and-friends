@@ -21,7 +21,7 @@
 #ifndef __GRAMMAR_H
 #define __GRAMMAR_H
 
-#include <iostream.h>  // ostream
+#include <iostream>  // std::ostream
 
 #include "str.h"       // string
 #include "objlist.h"   // ObjList
@@ -70,7 +70,7 @@ public:
     { return const_cast<Nonterminal&>(asNonterminalC()); }
 
   // debugging
-  virtual void print(ostream &os) const;
+  virtual void print(std::ostream &os) const;
   OSTREAM_OPERATOR(Symbol);
     // print as '$name: isTerminal=$isTerminal' (no newline)
 };
@@ -114,7 +114,7 @@ public:     // funcs
       termIndex(-1),
       alias(NULL) {}
 
-  virtual void print(ostream &os) const;
+  virtual void print(std::ostream &os) const;
   OSTREAM_OPERATOR(Terminal);
                           
   // return alias if defined, name otherwise
@@ -152,7 +152,7 @@ public:     // funcs
   Nonterminal(char const *name);
   virtual ~Nonterminal();
 
-  virtual void print(ostream &os) const;
+  virtual void print(std::ostream &os) const;
   OSTREAM_OPERATOR(Nonterminal);
 };
 
@@ -227,7 +227,7 @@ public:	    // funcs
   // print 'A -> B c D' (no newline)
   string toString() const;
   string rhsString() const;       // 'B c D' for above example rule
-  void print(ostream &os) const;
+  void print(std::ostream &os) const;
   OSTREAM_OPERATOR(Production);
 
   // print entire input syntax, with newlines, e.g.
@@ -286,8 +286,8 @@ public:	    // funcs
   Symbol const *symbolAfterDotC() const;
   Symbol *symbolAfterDot() { return const_cast<Symbol*>(symbolAfterDotC()); }
 
-  // print to cout as 'A -> B . c D' (no newline)
-  void print(ostream &os) const;
+  // print to std::cout as 'A -> B . c D' (no newline)
+  void print(std::ostream &os) const;
   OSTREAM_OPERATOR(DottedProduction);
 };
 
@@ -407,8 +407,8 @@ public:     // funcs
   void setTransition(Symbol const *sym, ItemSet *dest);
 
   // ---- debugging ----
-  void writeGraph(ostream &os) const;
-  void print(ostream &os) const;
+  void writeGraph(std::ostream &os) const;
+  void print(std::ostream &os) const;
   OSTREAM_OPERATOR(ItemSet);
 };
 
@@ -454,7 +454,7 @@ public:     // funcs
   void addProduction(Production *prod);
 
   // print the current list of productions
-  void printProductions(ostream &os) const;
+  void printProductions(std::ostream &os) const;
 
   // ---- whole-grammar stuff ----
   // after adding all rules, check that all nonterminals have
@@ -464,7 +464,7 @@ public:     // funcs
   // output grammar in Bison's syntax
   // (coincidentally, when bison dumps its table with '-v', its table
   // dump syntax is identical to my (current) input syntax!)
-  void printAsBison(ostream &os) const;
+  void printAsBison(std::ostream &os) const;
 
   // ---- grammar parsing ----
   void readFile(char const *fname);

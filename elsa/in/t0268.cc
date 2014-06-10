@@ -1,6 +1,6 @@
 // t0268.cc
 // problem associating a defn with a decl
-// from ostream, basic_string::append
+// from std::ostream, basic_string::append
 
 // this fwd decl appears to be important for my failing testcase
 template <class T >

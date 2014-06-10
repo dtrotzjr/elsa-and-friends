@@ -5,7 +5,7 @@
 #include "strtable.h"    // StringTable
 #include "exc.h"         // throw_XOpen
 
-#include <fstream.h>     // ifstream
+#include <fstream>     // std::ifstream
 
 #if defined(__GNUC__) && (__GNUC__ > 2)
   // gcc-3 doesn't have istrstream (but it is standard!), so fake it
@@ -13,7 +13,7 @@
 
   #undef string            // in case the string->mystring definition is active
 
-  inline istream *construct_istrstream(char const *buf, int len)
+  inline std::istream *construct_istrstream(char const *buf, int len)
   {
     return new std::istringstream(std::string(buf, len));
   }
@@ -22,7 +22,7 @@
   // (istrstream is deprecated but still standard)
   #include <strstream.h>   // istrstream
 
-  inline istream *construct_istrstream(char const *buf, int len)
+  inline std::istream *construct_istrstream(char const *buf, int len)
   {
     return new istrstream(buf, len);
   }
@@ -31,11 +31,11 @@
 
 // this function effectively lets me initialize one of the
 // members before initing a base class
-istream *BaseLexer::openFile(char const *fname)
+std::istream *BaseLexer::openFile(char const *fname)
 {
   // 2005-01-17: open in binary mode to coincide with srcloc.cc
   // doing the same, for cygwin reasons
-  this->inputStream = new ifstream(fname, ios::in | ios::binary);
+  this->inputStream = new std::ifstream(fname, std::ios::in | std::ios::binary);
   if (!*inputStream) {
     throw_XOpen(fname);
   }
@@ -62,7 +62,7 @@ BaseLexer::BaseLexer(StringTable &s, char const *fname)
 }
 
 
-istream *BaseLexer::openString(char const *buf, int len)
+std::istream *BaseLexer::openString(char const *buf, int len)
 {
   this->inputStream = construct_istrstream(buf, len);
   return inputStream;
@@ -144,14 +144,14 @@ int BaseLexer::tok(int t)
 void BaseLexer::err(char const *msg)
 {
   errors++;
-  cerr << toString(loc) << ": error: " << msg << endl;
+  std::cerr << toString(loc) << ": error: " << msg << std::endl;
 }
 
 
 void BaseLexer::warning(char const *msg)
 {
   warnings++;
-  cerr << toString(loc) << ": warning: " << msg << endl;
+  std::cerr << toString(loc) << ": warning: " << msg << std::endl;
 }
 
 

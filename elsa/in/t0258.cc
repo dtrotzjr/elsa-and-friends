@@ -1,6 +1,6 @@
 // t0258.cc
 // template class with member template class
-// needed for ostream
+// needed for std::ostream
 
 template <class S>
 struct A {

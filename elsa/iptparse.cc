@@ -188,7 +188,7 @@ void entry(int argc, char *argv[])
     tree->gdb();
   }
 
-  cout << "link chases: " << Node::linkChases << "\n";
+  std::cout << "link chases: " << Node::linkChases << "\n";
   
   delete tree;
 }

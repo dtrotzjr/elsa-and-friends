@@ -80,7 +80,7 @@ before the call to <tt>strTable.clear()</tt>, add the following code:
 <pre>
   CastCounter cc;
   unit-&gt;traverse(cc);
-  cout &lt;&lt; inputFname &lt;&lt; ": found " &lt;&lt; cc.count &lt;&lt; " casts\n";
+  std::cout &lt;&lt; inputFname &lt;&lt; ": found " &lt;&lt; cc.count &lt;&lt; " casts\n";
 </pre>
 This code creates an instance of <tt>CastCounter</tt>, initiates
 an AST traversal with <tt>traverse()</tt>, and finally prints out
@@ -154,7 +154,7 @@ implementation with the following:
       count++;
       E_cast *cast = obj-&gt;asE_cast();
 
-      cout &lt;&lt; toString(locOfType(cast-&gt;ctype))
+      std::cout &lt;&lt; toString(locOfType(cast-&gt;ctype))
            &lt;&lt; ": C cast of `" &lt;&lt; cast-&gt;expr-&gt;exprToString()
            &lt;&lt; "' to type `" &lt;&lt; cast-&gt;ctype-&gt;getType()-&gt;toString() &lt;&lt; "'\n";
     }
@@ -163,7 +163,7 @@ implementation with the following:
       count++;
       E_keywordCast *cast = obj-&gt;asE_keywordCast();
 
-      cout &lt;&lt; toString(locOfType(cast-&gt;ctype))
+      std::cout &lt;&lt; toString(locOfType(cast-&gt;ctype))
            &lt;&lt; ": " &lt;&lt; toString(cast-&gt;key)
            &lt;&lt; " of `" &lt;&lt; cast-&gt;expr-&gt;exprToString()
            &lt;&lt; "' to type `" &lt;&lt; cast-&gt;ctype-&gt;getType()-&gt;toString() &lt;&lt; "'\n";

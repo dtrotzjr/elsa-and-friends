@@ -69,7 +69,7 @@ agrampar.tab.cc agrampar.tab.h agrampar.codes.h: agrampar.y
 
 agrampar.tab.o: ast.hand.h ast.ast.h agrampar.h
 
-# have to use sed to change the forward declaration of 'istream'
+# have to use sed to change the forward declaration of 'std::istream'
 # into an #include, so the std:: namespace doesn't cause a problem
 agramlex.yy.cc: gramlex.h agramlex.lex agrampar.codes.h
 	$(MYFLEX) -o$@ agramlex.lex

@@ -32,7 +32,7 @@ public:      // funcs
 
   Root *clone() const;
 
-  void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
 };
 
@@ -58,7 +58,7 @@ public:      // funcs
 
   virtual A* clone() const=0;
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
 };
 
@@ -74,7 +74,7 @@ public:      // funcs
   virtual Kind kind() const { return A_ONE; }
   enum { TYPE_TAG = A_ONE };
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   virtual A_one *clone() const;
 
@@ -92,7 +92,7 @@ public:      // funcs
   virtual Kind kind() const { return A_TWO; }
   enum { TYPE_TAG = A_TWO };
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   virtual A_two *clone() const;
 
@@ -121,7 +121,7 @@ public:      // funcs
 
   virtual B* clone() const=0;
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   public:  int x ;
 };
@@ -138,7 +138,7 @@ public:      // funcs
   virtual Kind kind() const { return B_ONE; }
   enum { TYPE_TAG = B_ONE };
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   virtual B_one *clone() const;
 
@@ -156,7 +156,7 @@ public:      // funcs
   virtual Kind kind() const { return B_TWO; }
   enum { TYPE_TAG = B_TWO };
 
-  virtual void debugPrint(ostream &os, int indent, char const *subtreeName = "tree") const;
+  virtual void debugPrint(std::ostream &os, int indent, char const *subtreeName = "tree") const;
 
   virtual B_two *clone() const;
 

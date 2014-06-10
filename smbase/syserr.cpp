@@ -335,7 +335,7 @@ STATICDEF xSysError::Reason xSysError::portablize(int sysErrorCode, string &sysM
 #define TRY_FAIL(failingCall, expectedCode)                       \
   try {                                                           \
     if (failingCall) {                                            \
-      cout << "ERROR: " #failingCall " should have failed\n";     \
+      std::cout << "ERROR: " #failingCall " should have failed\n";     \
     }                                                             \
     else {                                                        \
       /* got an error to test */                                  \
@@ -344,7 +344,7 @@ STATICDEF xSysError::Reason xSysError::portablize(int sysErrorCode, string &sysM
   }                                                               \
   catch (xSysError &x) {                                          \
     if (x.reason != xSysError::expectedCode) {                    \
-      cout << "ERROR: " #failingCall " returned '"                \
+      std::cout << "ERROR: " #failingCall " returned '"                \
            << x.reasonString << "' but '"                         \
            << xSysError::getReasonString(xSysError::expectedCode) \
            << "' was expected\n";                                 \
@@ -371,10 +371,10 @@ void entry()
            R_FILE_NOT_FOUND);
 
   if (errors == 0) {
-    cout << "success!\n";
+    std::cout << "success!\n";
   }
   else {
-    cout << errors << " error(s)\n";
+    std::cout << errors << " error(s)\n";
   }
 }
 

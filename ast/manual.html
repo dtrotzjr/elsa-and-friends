@@ -60,7 +60,7 @@ There are currently three options:
 <li><tt>visitor</tt>: Emit code for traversal using a visitor.  See Section 3.
 <li><tt>gdb</tt>: To make it easier to call <tt>debugPrint()</tt>
     from with a debugger (such as gdb), emit methods called
-    <tt>gdb()</tt> that just call <tt>debugPrint(cout,0)</tt>.
+    <tt>gdb()</tt> that just call <tt>debugPrint(std::cout,0)</tt>.
 <li><tt>xmlPrint</tt>: Emit xmlPrint methods, similar to the debugPrint methods.
     The current xmlPrint is just a prototype and isn't used; improving
     it is still on the todo list.

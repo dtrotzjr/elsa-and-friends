@@ -6,7 +6,7 @@
 #include "ccsstr.h"      // CCSubstrate
 #include "ckheap.h"      // checkHeap
 
-#include <fstream.h>     // cout, ifstream
+#include <fstream>     // std::cout, std::ifstream
 
 
 // workaround for flex-2.5.31
@@ -35,7 +35,7 @@ void GrammarLexer::AltReportError::reportWarning(rostring msg)
 
 
 // ----------------- GrammarLexer::FileState --------------------
-GrammarLexer::FileState::FileState(rostring filename, istream *src)
+GrammarLexer::FileState::FileState(rostring filename, std::istream *src)
   : loc(sourceLocManager->encodeBegin(toCStr(filename))),
     source(src),
     bufstate(NULL)
@@ -70,7 +70,7 @@ GrammarLexer::FileState &GrammarLexer::FileState::
 
 // ---------------------- GrammarLexer --------------------------
 GrammarLexer::GrammarLexer(isEmbedTok test, StringTable &strtbl,
-                           char const *fname, istream *source,
+                           char const *fname, std::istream *source,
                            EmbeddedLang *userEmb)
   : yyFlexLexer(source),
     altReporter(*this),
@@ -91,7 +91,7 @@ GrammarLexer::GrammarLexer(isEmbedTok test, StringTable &strtbl,
     strtable(strtbl),
     errors(0)
 {
-  trace("tmp") << "source is " << source << endl;
+  trace("tmp") << "source is " << source << std::endl;
 
   // grab initial buffer object so we can restore it after
   // processing an include file (turns out this doesn't work
@@ -102,23 +102,23 @@ GrammarLexer::GrammarLexer(isEmbedTok test, StringTable &strtbl,
 GrammarLexer::~GrammarLexer()
 {
   // ~yyFlexLexer deletes its current buffer, but not any
-  // of the istream sources it's been passed
+  // of the std::istream sources it's been passed
 
   // first let's unpop any unpopped input files
   while (hasPendingFiles()) {
     popRecursiveFile();
   }
 
-  // now delete the original istream source
+  // now delete the original std::istream source
   // 
-  // 10/09/04: This used to say "fileState.source != cin", but that
-  // invokes cin.operator void*(), which always returns 0 or -1 in
+  // 10/09/04: This used to say "fileState.source != std::cin", but that
+  // invokes std::cin.operator void*(), which always returns 0 or -1 in
   // gcc-2.95.3's library.  I believe I intended to compare addresses,
   // though at this point I'm not sure since I don't know where the
   // call sites to the constructor are.  (I found this problem because
   // at one point Elsa (erroneously) choked on this construction.)
   if (fileState.source &&
-      fileState.source != &cin) {
+      fileState.source != &std::cin) {
     //checkHeap();
     //checkHeapNode(fileState.source);   // this is wrong b/c of virtual inheritance..
     delete fileState.source;
@@ -144,7 +144,7 @@ int GrammarLexer::yylexInc()
     string fname = includeFileName;
 
     // 'in' will be deleted in ~GrammarLexer
-    ifstream *in = new ifstream(fname.c_str());
+    std::ifstream *in = new std::ifstream(fname.c_str());
     if (!*in) {
       err(stringc << "unable to open include file `" << fname << "'");
     }
@@ -166,12 +166,12 @@ int GrammarLexer::yylexInc()
   if (embedTokTest(code)) {
     trace("lex") << "yielding embedded (" << code << ") at "
                  << curLocStr() << ": "
-                 << curFuncBody() << endl;
+                 << curFuncBody() << std::endl;
   }
   else {
     trace("lex") << "yielding token (" << code << ") "
                  << curToken() << " at "
-                 << curLocStr() << endl;
+                 << curLocStr() << std::endl;
   }
   #endif // 0/1
 
@@ -234,7 +234,7 @@ void GrammarLexer::reportError(rostring msg)
 void GrammarLexer::printError(SourceLoc loc, rostring msg)
 {
   errors++;
-  cerr << toString(loc) << ": error: " << msg << endl;
+  std::cerr << toString(loc) << ": error: " << msg << std::endl;
 }
 
 
@@ -245,7 +245,7 @@ void GrammarLexer::reportWarning(rostring msg)
 
 void GrammarLexer::printWarning(SourceLoc loc, rostring msg)
 {
-  cerr << toString(loc) << ": warning: " << msg << endl;
+  std::cerr << toString(loc) << ": warning: " << msg << std::endl;
 }
 
 
@@ -266,9 +266,9 @@ void GrammarLexer::errorIllegalCharacter(char ch)
 }
 
 
-void GrammarLexer::recursivelyProcess(rostring fname, istream *source)
+void GrammarLexer::recursivelyProcess(rostring fname, std::istream *source)
 {
-  trace("lex") << "recursively processing " << fname << endl;
+  trace("lex") << "recursively processing " << fname << std::endl;
                        
   // grab current buffer; this is necessary because when we
   // tried to grab it in the ctor it was NULL
@@ -293,11 +293,11 @@ void GrammarLexer::recursivelyProcess(rostring fname, istream *source)
 void GrammarLexer::popRecursiveFile()
 {
   trace("lex") << "done processing " <<     
-    sourceLocManager->getFile(fileState.loc) << endl;
+    sourceLocManager->getFile(fileState.loc) << std::endl;
 
   // among other things, this prevents us from accidentally deleting
   // flex's first buffer (which it presumably takes care of) or
-  // deleting 'cin'
+  // deleting 'std::cin'
   xassert(hasPendingFiles());
 
   // close down stuff associated with current file
@@ -332,7 +332,7 @@ int main(int argc)
   GrammarLexer lexer(isGramlexEmbed);
   traceAddSys("lex");
 
-  cout << "go!\n";
+  std::cout << "go!\n";
 
   while (1) {
     // any argument disables include processing
@@ -342,23 +342,23 @@ int main(int argc)
     }
 
     else if (isGramlexEmbed(code)) {
-      cout << "embedded code at " << lexer.curLocStr()
+      std::cout << "embedded code at " << lexer.curLocStr()
            << ": " << lexer.curFuncBody()
-           << endl;
+           << std::endl;
     }
     
     else if (code == TOK_INCLUDE) {
       // if I use yylexInc above, this is never reached
-      cout << "include at " << lexer.curLocStr()
+      std::cout << "include at " << lexer.curLocStr()
            << ": filename is `" << lexer.includeFileName.pcharc()
            << "'\n";
     }
     
     else {
-      cout << "token at " << lexer.curLocStr()
+      std::cout << "token at " << lexer.curLocStr()
            << ": code=" << code
            << ", text: " << lexer.curToken().pcharc()
-           << endl;
+           << std::endl;
     }
   }
 

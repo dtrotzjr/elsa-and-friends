@@ -57,8 +57,8 @@ bool Conditions::test(AttrContext const &actx) const
       }
     }
     catch (xBase &x) {
-      cout << "condition " << iter.data()->toString(actx.reductionC().production)
-           << " failed with exception: " << x << endl;
+      std::cout << "condition " << iter.data()->toString(actx.reductionC().production)
+           << " failed with exception: " << x << std::endl;
       return false;
     }
   }

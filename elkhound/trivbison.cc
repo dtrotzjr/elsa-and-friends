@@ -10,7 +10,7 @@
 #include "cyctimer.h"   // CycleTimer
 
 #include <stdio.h>      // printf
-#include <iostream.h>   // cout, etc.
+#include <iostream>   // std::cout, etc.
 
 // global list of L2 tokens for yielding to Bison
 Lexer2 lexer2;
@@ -92,17 +92,17 @@ int main(int argc, char *argv[])
   trivialLexer(inputFname, lexer2);
 
   // start Bison-parser
-  traceProgress() << "starting parse..." << endl;
+  traceProgress() << "starting parse..." << std::endl;
   CycleTimer timer;
 
   if (yyparse() != 0) {
-    cout << "yyparse returned with an error\n";
+    std::cout << "yyparse returned with an error\n";
   }
 
-  traceProgress() << "finished parse (" << timer.elapsed() << ")" << endl;
+  traceProgress() << "finished parse (" << timer.elapsed() << ")" << std::endl;
 
-  cout << "tree nodes: " << PTreeNode::allocCount
-       << endl;
+  std::cout << "tree nodes: " << PTreeNode::allocCount
+       << std::endl;
 
   return 0;
 }

@@ -2,13 +2,13 @@
 // problem with templatized forward decl?
 // no, was a problem with templatized prototypes
 
-class istream;
+class std::istream;
 
 template<class TP> class smanip;
 //template<class TP> class smanip {};
 
 template<class TP>
-inline istream& operator>>(istream& i, const smanip<TP>& m);
+inline std::istream& operator>>(std::istream& i, const smanip<TP>& m);
 //int foo(smanip<TP> &m);
 
 typedef smanip<int> smanip_int;

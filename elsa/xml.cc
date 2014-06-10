@@ -437,7 +437,7 @@ void XmlReaderManager::satisfyLinks_Nodes() {
       // no satisfaction was provided for this link; for now we just
       // skip it, but if you wanted to report that in some way, here
       // is the place to do it
-//        cout << "unsatisfied node link: " << ul->id << endl;
+//        std::cout << "unsatisfied node link: " << ul->id << std::endl;
     }
   }
 }
@@ -455,7 +455,7 @@ void XmlReaderManager::satisfyLinks_Lists() {
       // no satisfaction was provided for this link; for now we just
       // skip it, but if you wanted to report that in some way, here
       // is the place to do it
-      //        cout << "unsatisfied List link: " << ul->id << endl;
+      //        std::cout << "unsatisfied List link: " << ul->id << std::endl;
       continue;
     }
 
@@ -549,7 +549,7 @@ void XmlReaderManager::satisfyLinks_Maps() {
       // no satisfaction was provided for this link; for now we just
       // skip it, but if you wanted to report that in some way, here
       // is the place to do it
-      //        cout << "unsatisfied List link: " << ul->id << endl;
+      //        std::cout << "unsatisfied List link: " << ul->id << std::endl;
       continue;
     }
 

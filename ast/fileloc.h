@@ -108,7 +108,7 @@ public:
 
   friend stringBuilder& operator<< (stringBuilder &sb, SourceLocation const &obj)
     { return sb << obj.toString(); }
-  friend ostream& operator<< (ostream &os, SourceLocation const &obj)
+  friend std::ostream& operator<< (std::ostream &os, SourceLocation const &obj)
     { return os << obj.toString(); }
 };
 

@@ -1122,7 +1122,7 @@ bool MType::commonMatchType(Type const *conc, Type const *pat, MatchFlags flags)
   #ifndef NDEBUG
     static bool doTrace = tracingSys("mtype");
     if (doTrace) {
-      ostream &os = trace("mtype");
+      std::ostream &os = trace("mtype");
       os << "conc=`" << conc->toString()
          << "' pat=`" << pat->toString()
          << "' flags={" << toString(flags)
@@ -1137,7 +1137,7 @@ bool MType::commonMatchType(Type const *conc, Type const *pat, MatchFlags flags)
         os << bindingsToString();
       }
 
-      os << endl;
+      os << std::endl;
     }
   #endif // NDEBUG
 
@@ -1170,7 +1170,7 @@ bool MType::commonMatchSTemplateArguments(ObjList<STemplateArgument> const &conc
   #ifndef NDEBUG
     static bool doTrace = tracingSys("mtype");
     if (doTrace) {
-      ostream &os = trace("mtype");
+      std::ostream &os = trace("mtype");
       os << "conc=" << sargsToString(conc)
          << " pat=" << sargsToString(pat)
          << " flags={" << toString(flags)
@@ -1181,7 +1181,7 @@ bool MType::commonMatchSTemplateArguments(ObjList<STemplateArgument> const &conc
         os << bindingsToString();
       }
 
-      os << endl;
+      os << std::endl;
     }
   #endif // NDEBUG
 

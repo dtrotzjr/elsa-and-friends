@@ -275,7 +275,7 @@ do { \
 
 
 // -------------------- TypeToXml -------------------
-TypeToXml::TypeToXml(ostream &out0, int &depth0, bool indent0)
+TypeToXml::TypeToXml(std::ostream &out0, int &depth0, bool indent0)
   : out(out0)
   , depth(depth0)
   , indent(indent0)
@@ -285,7 +285,7 @@ TypeToXml::TypeToXml(ostream &out0, int &depth0, bool indent0)
 void TypeToXml::newline() {
   out << "\n";
   if (indent) {
-    for (int i=0; i<depth; ++i) cout << " ";
+    for (int i=0; i<depth; ++i) std::cout << " ";
   }
 }
 

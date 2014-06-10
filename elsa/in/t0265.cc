@@ -1,6 +1,6 @@
 // t0265.cc
 // does <dependent> match <dependent>?
-// needed for ostream, basic_string::replace
+// needed for std::ostream, basic_string::replace
 
 template <class T>
 struct A {

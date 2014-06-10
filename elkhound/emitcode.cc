@@ -47,7 +47,7 @@ void EmitCode::flush()
     os << *this;
   #else
     // 2005-06-28: There is a bug in the cygwin implementation of
-    // ofstream::operator<< that causes a stack overflow segfault
+    // std::ofstream::operator<< that causes a stack overflow segfault
     // when writing strings longer than about 2MB.  So, I will
     // manually break up the string into little chunks to write it.
 

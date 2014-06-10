@@ -1,6 +1,6 @@
 // t0261.cc
 // non-template member class of a template class
-// needed for ostream
+// needed for std::ostream
 
 template <class T>
 class A {

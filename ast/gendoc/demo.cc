@@ -13,7 +13,7 @@ Root::~Root()
   delete b;
 }
 
-void Root::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void Root::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, Root);
 
@@ -42,7 +42,7 @@ char const * const A::kindNames[A::NUM_KINDS] = {
   "A_two",
 };
 
-void A::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void A::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
 }
 
@@ -52,7 +52,7 @@ A_one::~A_one()
 {
 }
 
-void A_one::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void A_one::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, A_one);
 
@@ -76,7 +76,7 @@ A_two::~A_two()
   delete b;
 }
 
-void A_two::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void A_two::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, A_two);
 
@@ -105,7 +105,7 @@ char const * const B::kindNames[B::NUM_KINDS] = {
   "B_two",
 };
 
-void B::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void B::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_STRING(name);
 }
@@ -116,7 +116,7 @@ B_one::~B_one()
 {
 }
 
-void B_one::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void B_one::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, B_one);
 
@@ -140,7 +140,7 @@ B_two::~B_two()
 {
 }
 
-void B_two::debugPrint(ostream &os, int indent, char const *subtreeName) const
+void B_two::debugPrint(std::ostream &os, int indent, char const *subtreeName) const
 {
   PRINT_HEADER(subtreeName, B_two);
 

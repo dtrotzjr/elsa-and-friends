@@ -26,7 +26,7 @@ void fromXml(FunctionFlags &out, rostring str);
 // print the Type tree out as XML
 class TypeToXml {
   protected:
-  ostream &out;                 // output stream to which to print
+  std::ostream &out;                 // output stream to which to print
   int &depth;                   // ref so we can share our indentation depth with other printers
   bool indent;                  // should we print indentation?
 
@@ -41,7 +41,7 @@ class TypeToXml {
   SObjSet<void const *> printedSetNM;
 
   public:
-  TypeToXml(ostream &out0, int &depth0, bool indent0=false);
+  TypeToXml(std::ostream &out0, int &depth0, bool indent0=false);
   virtual ~TypeToXml() {}
 
   private:

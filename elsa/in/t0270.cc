@@ -1,5 +1,5 @@
 // t0270.cc
-// minimized from ostream, basic_string<char> ctor
+// minimized from std::ostream, basic_string<char> ctor
 
 template < typename _Tp > 
 class allocator

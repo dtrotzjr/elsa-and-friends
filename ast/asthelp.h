@@ -9,7 +9,7 @@
 #include "str.h"         // string
 #include "locstr.h"      // LocString
 
-#include <iostream.h>    // ostream
+#include <iostream>    // std::ostream
 
 // ----------------- downcasts --------------------
 // the 'if' variants return NULL if the type isn't what's expected;
@@ -173,7 +173,7 @@
 
 
 // ------------------- debug print helpers -----------------
-ostream &ind(ostream &os, int indent);
+std::ostream &ind(std::ostream &os, int indent);
 
 // I occasionally want to see addresses, so I just throw this
 // switch and recompile..
@@ -194,16 +194,16 @@ ostream &ind(ostream &os, int indent);
   debugPrintStr((var), #var, os, indent)    /* user ; */
 
 void debugPrintStr(string const &s, char const *name,
-                   ostream &os, int indent);
+                   std::ostream &os, int indent);
 void debugPrintStr(char const *s, char const *name,
-                   ostream &os, int indent);
+                   std::ostream &os, int indent);
 
 
 #define PRINT_CSTRING(var) \
   debugPrintCStr(var, #var, os, indent)    /* user ; */
 
 void debugPrintCStr(char const *s, char const *name,
-                    ostream &os, int indent);
+                    std::ostream &os, int indent);
 
 
 #define PRINT_LIST(T, list) \
@@ -211,7 +211,7 @@ void debugPrintCStr(char const *s, char const *name,
 
 template <class T>
 void debugPrintList(ASTList<T> const &list, char const *name,
-                    ostream &os, int indent)
+                    std::ostream &os, int indent)
 {
   ind(os, indent) << name << ":\n";
   int ct=0;
@@ -225,9 +225,9 @@ void debugPrintList(ASTList<T> const &list, char const *name,
 
 // provide explicit specialization for strings
 void debugPrintList(ASTList<string> const &list, char const *name,
-                    ostream &os, int indent);
+                    std::ostream &os, int indent);
 void debugPrintList(ASTList<LocString> const &list, char const *name,
-                    ostream &os, int indent);
+                    std::ostream &os, int indent);
 
 
 #define PRINT_FAKE_LIST(T, list) \
@@ -235,7 +235,7 @@ void debugPrintList(ASTList<LocString> const &list, char const *name,
 
 template <class T>
 void debugPrintFakeList(FakeList<T> const *list, char const *name,
-                        ostream &os, int indent)
+                        std::ostream &os, int indent)
 {
   ind(os, indent) << name << ":\n";
   int ct=0;
@@ -270,7 +270,7 @@ void debugPrintFakeList(FakeList<T> const *list, char const *name,
 
 // ------------------- xml print helpers -----------------
 // dsw: given above in the debug print section.
-//  ostream &ind(ostream &os, int indent);
+//  std::ostream &ind(std::ostream &os, int indent);
 
 #define XMLPRINT_HEADER(clsname)                            \
   ind(os, indent) << "<object type=\"" << #clsname "\">\n"; \
@@ -284,7 +284,7 @@ void debugPrintFakeList(FakeList<T> const *list, char const *name,
   xmlPrintStr(var, #var, os, indent) /* user ; */
 
 void xmlPrintStr(string const &s, char const *name,
-                 ostream &os, int indent);
+                 std::ostream &os, int indent);
 
 
 #define XMLPRINT_LIST(T, list)                              \
@@ -292,7 +292,7 @@ void xmlPrintStr(string const &s, char const *name,
 
 template <class T>
 void xmlPrintList(ASTList<T> const &list, char const *name,
-                  ostream &os, int indent)
+                  std::ostream &os, int indent)
 {
   ind(os, indent) << "<member type=list name=\"" << name << "\">\n";
   {
@@ -305,9 +305,9 @@ void xmlPrintList(ASTList<T> const &list, char const *name,
 
 // provide explicit specialization for strings
 void xmlPrintList(ASTList<string> const &list, char const *name,
-                    ostream &os, int indent);
+                    std::ostream &os, int indent);
 void xmlPrintList(ASTList<LocString> const &list, char const *name,
-                    ostream &os, int indent);
+                    std::ostream &os, int indent);
 
 
 #define XMLPRINT_FAKE_LIST(T, list) \
@@ -315,7 +315,7 @@ void xmlPrintList(ASTList<LocString> const &list, char const *name,
 
 template <class T>
 void xmlPrintFakeList(FakeList<T> const *list, char const *name,
-                        ostream &os, int indent)
+                        std::ostream &os, int indent)
 {
   ind(os, indent) << "<member type=fakelist name=\"" << name << "\">\n";
   {
@@ -356,7 +356,7 @@ void xmlPrintFakeList(FakeList<T> const *list, char const *name,
 // print a pointer address as an id, for example "FL0x12345678";
 // guaranteed to print (e.g.) "FL0" for NULL pointers; the
 // "FL" part is the label
-void xmlPrintPointer(ostream &os, char const *label, void const *p);
+void xmlPrintPointer(std::ostream &os, char const *label, void const *p);
 
 
 // ---------------------- deep-copy ------------------

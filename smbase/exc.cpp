@@ -5,7 +5,7 @@
 #include "exc.h"          // this module
 
 #include <string.h>       // strlen, strcpy
-#include <iostream.h>     // clog
+#include <iostream>     // std::clog
 #include <stdarg.h>       // va_xxx
 #include <ctype.h>        // toupper, tolower
 
@@ -19,7 +19,7 @@ xBase::xBase(rostring m)
   : msg(m)
 {
   if (logExceptions) {
-    clog << "Exception thrown: " << m << endl;
+    std::clog << "Exception thrown: " << m << std::endl;
   }
 
   // done at very end when we know this object will
@@ -62,7 +62,7 @@ bool unwinding_other(xBase const &)
 }
 
 
-void xBase::insert(ostream &os) const
+void xBase::insert(std::ostream &os) const
 {
   os << why();
 }
@@ -280,13 +280,13 @@ void throw_XFatal(rostring msg)
 int main()
 {
   xBase x("yadda");
-  cout << x << endl;
+  std::cout << x << std::endl;
 
   try {
     THROW(x);
   }
   catch (xBase &x) {
-    cout << "caught xBase: " << x << endl;
+    std::cout << "caught xBase: " << x << std::endl;
   }
 
   return 0;

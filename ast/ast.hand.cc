@@ -13,7 +13,7 @@
 
 
 // ------------------- ASTSpecFile ----------------------
-void ASTSpecFile::debugPrint(ostream &os, int indent) const
+void ASTSpecFile::debugPrint(std::ostream &os, int indent) const
 {
   PRINT_HEADER(ASTSpecFile);
 
@@ -22,7 +22,7 @@ void ASTSpecFile::debugPrint(ostream &os, int indent) const
 
 
 // ----------------- ToplevelForm -------------------
-void ToplevelForm::debugPrint(ostream &os, int indent) const
+void ToplevelForm::debugPrint(std::ostream &os, int indent) const
 {}
 
 
@@ -30,7 +30,7 @@ DEFN_AST_DOWNCASTS(ToplevelForm, TF_verbatim, TF_VERBATIM)
 DEFN_AST_DOWNCASTS(ToplevelForm, ASTClass, ASTCLASS)
 
 
-void TF_verbatim::debugPrint(ostream &os, int indent) const
+void TF_verbatim::debugPrint(std::ostream &os, int indent) const
 {
   PRINT_HEADER(TF_verbatim);
 
@@ -39,7 +39,7 @@ void TF_verbatim::debugPrint(ostream &os, int indent) const
   PRINT_STRING(code);
 }
 
-void ASTClass::debugPrint(ostream &os, int indent) const
+void ASTClass::debugPrint(std::ostream &os, int indent) const
 {
   PRINT_HEADER(ASTClass);
 
@@ -53,7 +53,7 @@ void ASTClass::debugPrint(ostream &os, int indent) const
 
 
 // ------------------ UserDecl --------------------
-void UserDecl::debugPrint(ostream &os, int indent) const
+void UserDecl::debugPrint(std::ostream &os, int indent) const
 {
   PRINT_HEADER(UserDecl);
 
@@ -63,7 +63,7 @@ void UserDecl::debugPrint(ostream &os, int indent) const
 
 
 // -------------------- ASTCtor -----------------
-void ASTCtor::debugPrint(ostream &os, int indent) const
+void ASTCtor::debugPrint(std::ostream &os, int indent) const
 {
   PRINT_HEADER(ASTCtor);
 
@@ -74,7 +74,7 @@ void ASTCtor::debugPrint(ostream &os, int indent) const
 
 
 // ------------------ CtorArg -------------------
-void CtorArg::debugPrint(ostream &os, int indent) const
+void CtorArg::debugPrint(std::ostream &os, int indent) const
 {
   PRINT_HEADER(CtorArg);
 

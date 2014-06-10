@@ -89,7 +89,7 @@ public:
 
   // print the boxprint tree; for debugging code that produces them;
   // these methods do not emit leading or trailing whitespace
-  virtual void debugPrint(ostream &os, int ind) const =0;
+  virtual void debugPrint(std::ostream &os, int ind) const =0;
 
   // deallocate the element
   virtual ~BPElement();
@@ -108,7 +108,7 @@ public:
   // BPElement funcs
   virtual int oneLineWidthEx(bool &forcedBreak);
   virtual void render(BPRender &mgr);
-  virtual void debugPrint(ostream &os, int ind) const;
+  virtual void debugPrint(std::ostream &os, int ind) const;
 };
 
 
@@ -145,7 +145,7 @@ public:
   virtual void render(BPRender &mgr);
   virtual bool isBreak() const;
   virtual bool isForcedBreak() const;
-  virtual void debugPrint(ostream &os, int ind) const;
+  virtual void debugPrint(std::ostream &os, int ind) const;
 };
 
 
@@ -182,7 +182,7 @@ public:
   // BPElement funcs
   virtual int oneLineWidthEx(bool &forcedBreak);
   virtual void render(BPRender &mgr);
-  virtual void debugPrint(ostream &os, int ind) const;
+  virtual void debugPrint(std::ostream &os, int ind) const;
 };
 
 
@@ -264,7 +264,7 @@ public:      // funcs
   BPBox* /*owner*/ takeTree();
   
   // print the current stack of trees
-  void debugPrint(ostream &os) const;
+  void debugPrint(std::ostream &os) const;
   void debugPrintCout() const;      // for gdb
 };
 

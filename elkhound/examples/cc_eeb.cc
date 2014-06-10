@@ -9,7 +9,7 @@
 #include "srcloc.h"      // SourceLoc
 
 #include <assert.h>      // assert
-#include <iostream.h>    // cout
+#include <iostream>    // std::cout
 #include <stdlib.h>      // abort
 
 static char const *termNames[] = {
@@ -126,8 +126,8 @@ void EEB::deallocateNontermValue(int nontermId, SemanticValue sval)
       del_E((Node*)sval);
       return;
     default:
-      cout << "WARNING: there is no action to deallocate nonterm "
-           << nontermNames[nontermId] << endl;
+      std::cout << "WARNING: there is no action to deallocate nonterm "
+           << nontermNames[nontermId] << std::endl;
   }
 }
 
@@ -138,9 +138,9 @@ SemanticValue EEB::mergeAlternativeParses(int nontermId, SemanticValue left,
     case 2:
       return (SemanticValue)merge_E((Node*)left, (Node*)right);
     default:
-      cout << toString(loc) 
+      std::cout << toString(loc) 
            << ": WARNING: there is no action to merge nonterm "
-           << nontermNames[nontermId] << endl;
+           << nontermNames[nontermId] << std::endl;
       return left;
   }
 }
@@ -167,8 +167,8 @@ void EEB::deallocateTerminalValue(int termId, SemanticValue sval)
 {
   switch (termId) {
     default:
-      cout << "WARNING: there is no action to deallocate terminal "
-           << termNames[termId] << endl;
+      std::cout << "WARNING: there is no action to deallocate terminal "
+           << termNames[termId] << std::endl;
   }
 }
 
