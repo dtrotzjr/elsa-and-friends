@@ -12,7 +12,7 @@
 # can be linked with other flex-generated lexers:
 #
 #   2a. Wrap all yyFlexLexer methods with
-#         #ifdef WANT_YYFLEXLEXER_METHODS
+#         #ifndef NO_YYFLEXLEXER_METHODS
 #         #endif
 #   so that from the Makefile I can control whether the object file
 #   contains those methods.
@@ -220,9 +220,12 @@ for ($i=0; $i < @lines; $i++) {
   }
 
   elsif ($state == 6) {
-    if ($lines[$i+1] =~ m/^yyFlexLexer::yyFlexLexer/) {
+    if ($line =~ m/^yyFlexLexer::yyFlexLexer/) {
       $state++;
-      print OUT ("#ifndef NO_YYFLEXLEXER_METHODS\n");
+      $i++;       # skip the '{' line, to keep #line numbers in sync
+	  chomp($line);	  
+      print OUT ("#ifndef NO_YYFLEXLEXER_METHODS\n" .
+	  			 $line . " {\n");
       next;
     }
   }
