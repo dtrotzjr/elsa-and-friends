@@ -250,7 +250,7 @@ verbatim {
   // the loop from scratch
   inline bool nextPtrContinue(NextPtr np)
   {
-    return (bool)((int)np & 1);
+    return (bool)((int)(uintptr_t)np & 1);
   }
 
   // prints like Statement::kindLocString, with a "(c)" appended

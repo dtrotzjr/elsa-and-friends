@@ -77,7 +77,7 @@ void jmpHandler(int signum)
 
 void printAddrHandler(int signum, siginfo_t *info, void *)
 {
-  fprintf(stderr, "faulting address: 0x%08X\n", (int)(info->si_addr));
+  fprintf(stderr, "faulting address: 0x%08X\n", (uintptr_t)(info->si_addr));
   
   // reset handler and re-raise
   setHandler(signum, SIG_DFL);
