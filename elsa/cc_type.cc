@@ -2712,7 +2712,7 @@ Type *TypeFactory::applyCVToType(SourceLoc loc, CVFlags cv, Type *baseType,
   }
 
   CVFlags now = baseType->getCVFlags();
-  if (now | cv == now) {
+  if ((now | cv) == now) {
     // no change, 'cv' already contained in the existing flags
     return baseType;
   }
