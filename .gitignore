@@ -1,0 +1,15 @@
+*.dSYM
+
+testcout
+
+*.o
+
+config.summary
+
+config.status
+
+Makefile
+
+tmp.txt
+
+/elkhound/glrconfig.h
