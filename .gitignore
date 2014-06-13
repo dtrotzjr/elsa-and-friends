@@ -61,3 +61,6 @@ tmp.txt
 /ast/astgen
 /ast/agrampar.output
 /ast/agrampar.codes.h
+
+/elsa/quicktest
+/elsa/ccparse
