@@ -199,12 +199,16 @@ for ($i=0; $i < @lines; $i++) {
   }
 
   elsif ($state == 4) {
-    if ($line =~ m/^int yyFlexLexer::yylex/) {
+    if ($line =~ m/^int yyFlexLexer::yywrap/) {
       $state++;
-      $i++;       # skip the '{' line, to keep #line numbers in sync
+      $i++;       # skip subsequent blank line
       chomp($line);
+      $nextLine = $lines[$i];
+      chomp($nextLine);
+      $i++;
       print OUT ("#ifndef NO_YYFLEXLEXER_METHODS\n" .
-                 $line . " {\n");
+                 $line . "\n" .
+                 $nextLine . "{\n");
       next;
     }
   }
