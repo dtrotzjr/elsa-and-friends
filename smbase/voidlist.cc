@@ -752,7 +752,7 @@ void verifySorted(VoidList const &list)
   int prev = 0;
   VoidListIter iter(list);
   for (; !iter.isDone(); iter.adv()) {
-    int current = (int)iter.data();
+    int current = (int)(uintptr_t)iter.data();
     xassert(prev <= current);    // numeric address test
     prev = current;
   }
