@@ -569,7 +569,7 @@ clean: gcom-clean
 	$(MAKE) -C c clean
 
 distclean: clean
-	rm -f Makefile config.status config.summary glrconfig.h *.tmp
+	rm -f Makefile config.status config.summary *.tmp
 	cd triv; rm -rf sssx.in ssx.in eeb.in
 	$(MAKE) -C c distclean
 	rm -rf gendoc

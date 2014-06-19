@@ -2342,7 +2342,7 @@ void GLR::rwlShiftTerminals()
 string stackNodeName(StackNode const *sn)
 {
   Symbol const *s = sn->getSymbolC();
-  char const *symName = (s? s->name.pcharc() : "(null)");
+  char const *symName = (s? s->name.c_str() : "(null)");
   return stringb(sn->stackNodeId
               << ":col="  << sn->tokenColumn
               << ",st=" << sn->state->id

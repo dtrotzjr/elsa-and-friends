@@ -193,7 +193,7 @@ public:      // funcs
   bool getAllowNonConst() const { return allowNonConst; }
 
   // Publish this member; see its comments above.
-  IMType::failedDueToDQT;
+  using IMType::failedDueToDQT;
 
   // ---- const match ----
   // these functions can only be called if 'allowNonConst' is false
