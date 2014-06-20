@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "container:elsa.xcodeproj">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "friends">
+      <FileRef
+         location = "group:../smbase/smbase.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:../ast/ast.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:../elkhound/elkhound.xcodeproj">
+      </FileRef>
+   </Group>
+</Workspace>

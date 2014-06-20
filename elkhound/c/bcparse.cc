@@ -87,7 +87,7 @@ int yylex()
 void yyerror(char const *s)
 {
   if (lastTokenYielded) {
-    printf("%s: ", toString(lastTokenYielded->loc).pcharc());
+    printf("%s: ", toString(lastTokenYielded->loc).c_str());
   }
   else {
     printf("<eof>: ");
